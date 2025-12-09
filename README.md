@@ -100,9 +100,13 @@ Created → Rented → Issued → ReturnedOk/ReturnedDamaged → Completed
 ## 5. Lokalus testavimas (Remix)
 
 Testavau kontraktą **Remix IDE** su **JavaScript VM**:
+<img width="500" height="489" alt="image" src="https://github.com/user-attachments/assets/10fb4565-ad19-4f0f-95ed-a3df05cfdcc1" />
+
 
 ### 5.1 Deploy
-![Deploy](docs/deploy.png)
+<img width="530" height="291" alt="image" src="https://github.com/user-attachments/assets/7bcb8893-9595-49b5-a60d-2590c296aa53" />
+<img width="2137" height="885" alt="image" src="https://github.com/user-attachments/assets/e88a454f-76e2-4202-a6e4-77e394c9f006" />
+<img width="2123" height="872" alt="image" src="https://github.com/user-attachments/assets/3eec2763-d3ed-40df-8d1c-9635250e0fcd" />
 
 ### 5.2 rent() – Depozito mokėjimas
 ![Rent](docs/rent.png)
