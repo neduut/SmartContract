@@ -117,7 +117,8 @@ Reentrancy	ETH išmokėjimas atliekamas paskutinis
 
 6.6 Galutinė būsena
 
-<img width="2185" height="869" alt="image" src="https://github.com/user-attachments/assets/3eb3bc21-818d-45dd-9921-a6498768dbd2" />
+<img width="551" height="1216" alt="image" src="https://github.com/user-attachments/assets/d260c85e-460e-45b1-9159-0764f4d6e613" />
+
 
 🌐 7. Deploy į Ethereum Testnet (Sepolia)
 
