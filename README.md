@@ -207,17 +207,122 @@ Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui 
 4. Remix → Injected Provider
    
 <img width="591" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+Kas kart reikėjo MetaMask'e perjungti aktyvų account'ą, kad galėčiau jį naudoti Remix'e.
 
-5. Deploy ir funkcijų iškvietimas
-6. Patikrinimas Etherscan'e
+5. Testavimas
+
+### Pradinės sumos
+
+Renter:
+Owner:
+Inspector:
+
+### Konfiguracijos
+
+Deposit:
+Custom gas limit:
+
+### 5.1 Deploy
+
+Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
+
+**Konfiguracijos:**
+
+img
+
+**Pakeičiau į Inspector account'ą:**
+
+img
+
+**Contract sėkmingas:**
+
+img
+
+### 5.2 rent() – Depozito mokėjimas
+
+**Mokėjimas sėkmingas:**
+
+img
+
+**Nuomininkas sumokėjo 1 ETH depozitą:**
+
+img
+
+### 5.3 markIssued() – Išdavimo patvirtinimas
+
+Savininkas patvirtina, kad inventorius išduotas.
+**Patvirtinimas sėkmingas: **
+
+img
+
+### 5.4 confirmReturn() – Inspektoriaus tikrinimas
+
+#### Scenarijus 1: Inventorius tvarkingas ✅
+
+Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = false).
+
+**confirmReturn(false) iškvieta:**
+
+img
+
+**Transakcija sėkminga:**
+
+img
+
+### 5.5 complete() – Depozito grąžinimas nuomininkui
+
+#### Scenarijus 1: Depozito grąžinimas ✅
+
+Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
+
+**complete() iškvieta:**
+
+img
+
+**Rezultatas:** Renter atgavo x ETH depozitą
+
+img
+
+### Galutinės sumos
+
+Renter:
+Owner:
+Inspector:
+
+
+### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
+
+#### Scenarijus 2: Inventorius sugadintas ❌
+
+Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
+
+**confirmReturn(true) iškvieta:**
+
+img
+
+**completeDamaged() iškviesta sėkmingai:**
+
+img
+
+**Rezultatas:** Owner gavo x ETH kompensaciją, Renter neatgavo
+
+img
+
+### Galutinės sumos
+
+Renter:
+Owner:
+Inspector:
+
 
 ---
 
-## 7. Etherscan logai
+## 7. Etherscan logai 
 
-Visos transakcijos matomos Etherscan'e:
+Naudojau: https://sepolia.etherscan.io/
+Visos transakcijos matomos Etherscan'e (prijungiau tik kai jau su MetaMask dariau):
 
-![Etherscan](docs/etherscan.png)
+img
 
 ---
 
