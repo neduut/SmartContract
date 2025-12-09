@@ -47,80 +47,8 @@ Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia t
 
 ## 3. Sekų diagrama
 
-![Sequence Diagram](docs/sequence.png)
+![Sequence Diagram](img/seku_diagrama.png)
 
-### ASCII sekų schema:
-
-```
-┌─────────┐          ┌─────────┐          ┌───────────┐          ┌──────────────┐
-│  Owner  │          │ Renter  │          │ Inspector │          │   Contract   │
-└────┬────┘          └────┬────┘          └─────┬─────┘          └──────┬───────┘
-     │                    │                     │                       │
-     ├─────── (1) constructor(deposit, inspector) ──────────────────────>│
-     │                    │                     │              state = Created
-     │<────────────────── Contract Address ────────────────────────────┤
-     │                    │                     │                       │
-     │                    ├─── (2) rent() + deposit ETH ───────────────>│
-     │                    │                     │         renter = msg.sender
-     │                    │                     │              state = Rented
-     │                    │<────── Deposit Locked ──────────────────────┤
-     │                    │                     │                       │
-     ├── (3) 🎾 Fiziškai išduoda inventorių ───>│                       │
-     ├────────────── markIssued() ──────────────────────────────────────>│
-     │                    │                     │              state = Issued
-     │<───────────── Issue Confirmed ──────────────────────────────────┤
-     │                    │                     │                       │
-     │<────── (4) 🎾 Fiziškai grąžina ──────────┤                       │
-     │                    │                     │                       │
-     │                    │      ┌──────────────┴───────────────┐       │
-     │                    │      │ Inspector apžiūri fiziškai   │       │
-     │                    │      └──────────────┬───────────────┘       │
-     │                    │                     │                       │
-     │                    │         ┌─────── (5) confirmReturn(false) ──>│  [TVARKINGAS]
-     │                    │         │           │         state = ReturnedOk
-     │────────── (6A) complete() ──┼───────────┼───────────────────────>│
-     │                    │         │           │         state = Completed
-     │                    │<────────┼───────────┼── 💰 deposit ETH ─────┤  Refund!
-     │                    │         │           │                       │
-     │                    │         └─ (5) confirmReturn(true) ─────────>│  [SUGADINTAS]
-     │                    │                     │       state = ReturnedDamaged
-     ├────────── (6B) completeDamaged() ───────┼───────────────────────>│
-     │                    │                     │         state = Completed
-     │<───────────────────┼─────────────────────┼── 💰 deposit ETH ─────┤  Compensation!
-     │                    │                     │                       │
-     ▼                    ▼                     ▼                       ▼
-```
-
-### PlantUML kodas:
-
-```plantuml
-@startuml
-actor Owner
-actor Renter
-actor Inspector
-participant Contract
-
-Owner -> Contract: constructor(deposit, inspector)
-Contract --> Owner: state = Created
-
-Renter -> Contract: rent() + deposit
-Contract --> Renter: state = Rented
-
-Owner -> Contract: markIssued()
-Contract --> Owner: state = Issued
-
-Inspector -> Contract: confirmReturn(damaged)
-alt damaged = false
-    Contract --> Inspector: state = ReturnedOk
-    Owner -> Contract: complete()
-    Contract -> Renter: transfer(deposit)
-else damaged = true
-    Contract --> Inspector: state = ReturnedDamaged
-    Owner -> Contract: completeDamaged()
-    Contract -> Owner: transfer(deposit)
-end
-@enduml
-```
 
 ### Sekų aprašymai:
 
