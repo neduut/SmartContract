@@ -102,19 +102,80 @@ Created → Rented → Issued → ReturnedOk/ReturnedDamaged → Completed
 Testavau kontraktą **Remix IDE** su **JavaScript VM**:
 
 ### 5.1 Deploy
-![Deploy](docs/deploy.png)
+
+Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
+
+**Compile:**
+<img width="600" alt="Remix compile" src="https://github.com/user-attachments/assets/10fb4565-ad19-4f0f-95ed-a3df05cfdcc1" />
+
+**Deploy konfigūracija:**
+<img width="600" alt="Deploy setup" src="https://github.com/user-attachments/assets/de7c24a1-8299-4726-9760-706ec56e9b27" />
+
+**Deploy rezultatas:**
+<img width="600" alt="Deploy success" src="https://github.com/user-attachments/assets/0585c272-9bb8-422f-b3f0-1031e8a6e1b6" />
+
+**Contract adresas:**
+<img width="900" alt="Contract address" src="https://github.com/user-attachments/assets/e95b7ec0-afa6-4230-b8a7-899c7c5b58ac" />
 
 ### 5.2 rent() – Depozito mokėjimas
-![Rent](docs/rent.png)
+
+Nuomininkas sumoka 1 ETH depozitą.
+
+**Skambinimas su 1 ETH:**
+<img width="900" alt="rent call" src="https://github.com/user-attachments/assets/b68b25c9-2ef3-4510-ba7e-9688ccc493e1" />
+
+**Contract balansas padidėjo į 1 ETH:**
+<img width="600" alt="balance 1 ETH" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
-![Issued](docs/issued.png)
+
+Savininkas patvirtina, kad inventorius išduotas.
+
+<img width="900" alt="markIssued call" src="https://github.com/user-attachments/assets/30f3112e-f220-4658-a865-a8815a5a2c47" />
 
 ### 5.4 confirmReturn() – Inspektoriaus tikrinimas
-![Inspect](docs/inspect.png)
 
-### 5.5 complete() – Pinigų išmokėjimas
-![Complete](docs/complete.png)
+#### Scenarijus 1: Inventorius tvarkingas ✅
+
+Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = false).
+
+**confirmReturn(false) iškvieta:**
+<img width="600" alt="confirmReturn false" src="https://github.com/user-attachments/assets/2035cc53-c541-4f80-bdc1-ed368bde088e" />
+
+**Transakcija sėkminga:**
+<img width="900" alt="transaction success" src="https://github.com/user-attachments/assets/1efa9531-b72d-4cba-b322-6bcfd89a545b" />
+
+### 5.5 complete() – Pinigų grąžinimas Nuomininkui
+
+#### Scenarijus 1: Depozito grąžinimas ✅
+
+Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
+
+**complete() iškvieta:**
+<img width="900" alt="complete call" src="https://github.com/user-attachments/assets/dfa65ca0-4c52-4fa9-8c97-214cf015a04f" />
+
+**Balansas nuo 1 ETH ➜ 0 ETH:**
+<img width="600" alt="balance 0 ETH" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
+
+**Rezultatas:** Renter atgavo 1 ETH depozitą ✅
+
+### 5.6 completeDamaged() – Pinigų grąžinimas Savininkui
+
+#### Scenarijus 2: Inventorius sugadintas ❌
+
+Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
+
+**confirmReturn(true) iškvieta:**
+<img width="600" alt="confirmReturn true" src="https://github.com/user-attachments/assets/eab08a44-972f-49f4-8dac-51c9d8c2117c" />
+
+**completeDamaged() iškvieta:**
+<img width="900" alt="completeDamaged call" src="https://github.com/user-attachments/assets/a209bb28-a4a6-4c50-be24-30c2d9f51aff" />
+
+**Balansas 0 ETH (depozitas Owner):**
+<img width="600" alt="Owner receives deposit" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
+
+**Rezultatas:** Owner gavo 1 ETH kompensaciją, Renter neatgavo ❌
+
 
 ---
 

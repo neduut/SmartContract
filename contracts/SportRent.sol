@@ -1,26 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title SportRent
- * @notice Decentralizuota sporto inventoriaus nuomos sutartis (escrow modelis)
- *
- * Dalyviai:
- * - Owner: inventoriaus savininkas
- * - Renter: nuomininkas
- * - Inspector: tikrina inventoriaus būklę po grąžinimo
- *
- * Procesas:
- * 1) Owner sukuria nuomos pasiūlymą (deposit + inspector adresas)
- * 2) Renter sumoka deposit → state = Rented
- * 3) Owner išduoda inventorių → state = Issued
- * 4) Inspector patvirtina grąžinimą:
- *      - Jei tvarkinga → refund Renter
- *      - Jei sugadinta → deposit atitenka Owner
- *
- * Sutarties užbaigimas → state = Completed
- */
-
 contract SportRent {
 
     // --- Roles ---
