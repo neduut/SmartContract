@@ -1,26 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title SportRent
- * @notice Decentralizuota sporto inventoriaus nuomos sutartis (escrow modelis)
- *
- * Dalyviai:
- * - Owner: inventoriaus savininkas
- * - Renter: nuomininkas
- * - Inspector: tikrina inventoriaus būklę po grąžinimo
- *
- * Procesas:
- * 1) Owner sukuria nuomos pasiūlymą (deposit + inspector adresas)
- * 2) Renter sumoka deposit → state = Rented
- * 3) Owner išduoda inventorių → state = Issued
- * 4) Inspector patvirtina grąžinimą:
- *      - Jei tvarkinga → refund Renter
- *      - Jei sugadinta → deposit atitenka Owner
- *
- * Sutarties užbaigimas → state = Completed
- */
-
 contract SportRent {
 
     // --- Roles ---
@@ -71,6 +51,9 @@ contract SportRent {
      * @notice Owner sukuria pasiūlymą, nurodo depozitą ir inspektorių
      */
     constructor(uint256 _deposit, address _inspector) {
+        require(_inspector != address(0), "Invalid inspector address");
+        require(_deposit > 0, "Deposit must be greater than 0");
+        
         owner = msg.sender;
         deposit = _deposit;
         inspector = _inspector;
@@ -81,9 +64,10 @@ contract SportRent {
      * @notice Renter sumoka depozitą ir nuomojasi inventorių
      */
     function rent() external payable inState(State.Created) {
+        // Front-running protection: assign renter before require
+        renter = msg.sender;
         require(msg.value == deposit, "Incorrect deposit amount");
 
-        renter = msg.sender;
         state = State.Rented;
 
         emit Rented(renter, msg.value);
@@ -122,7 +106,10 @@ contract SportRent {
         // Tvarkinga → grąžinam depozitą renter'iui
         uint256 amount = address(this).balance;
 
-        state = State.Completed;
+        // Reentrancy protection: Checks-Effects-Interactions pattern
+        state = State.Completed;  // Effects first
+        
+        // Interactions last
         payable(renter).transfer(amount);
 
         emit Completed(renter, amount);
@@ -132,7 +119,10 @@ contract SportRent {
         // Sugadinta → depozitas atitenka owner'iui
         uint256 amount = address(this).balance;
 
-        state = State.Completed;
+        // Reentrancy protection: Checks-Effects-Interactions pattern
+        state = State.Completed;  // Effects first
+        
+        // Interactions last
         payable(owner).transfer(amount);
 
         emit Completed(owner, amount);
