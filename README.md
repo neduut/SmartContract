@@ -6,7 +6,11 @@
 
 ## 1. Trumpas aprašymas
 
-Šiame projekte sukūriau išmaniąją sutartį sporto inventoriaus nuomos depozito mokėjimui. Naudojau **escrow** logiką - saugų atsiskaitymą per smart contract, kad nei savininkas, nei nuomininkas nerizikuotų prarasti pinigų ar inventoriaus.
+Šiame projekte sukūriau išmaniąją sutartį sporto inventoriaus nuomos depozito apdorojimui (be nuomos kainos). 
+
+Naudojau **escrow** logiką - užtikrinamas saugus atsiskaitymas per smart contract, kad nei savininkas, nei nuomininkas nerizikuotų prarasti pinigų ar inventoriaus.
+
+_Escrow = tarpininkas, kuris laiko pinigus, kol abi pusės įvykdo savo įsipareigojimus_
 
 **Realaus pasaulio panaudojimo atvejai:**
 - ⛷️ **Slidinėjimo įrangos nuoma** slidinėjimo kurorte
@@ -115,20 +119,24 @@ Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 <img width="450" alt="Deploy success" src="https://github.com/user-attachments/assets/0585c272-9bb8-422f-b3f0-1031e8a6e1b6" />
 
 **Contract sėkmingas:**
+
 <img width="750" alt="Contract address" src="https://github.com/user-attachments/assets/e95b7ec0-afa6-4230-b8a7-899c7c5b58ac" />
 
 ### 5.2 rent() – Depozito mokėjimas
 
 **Mokėjimas sėkmingas:**
+
 <img width="900" alt="rent call" src="https://github.com/user-attachments/assets/b68b25c9-2ef3-4510-ba7e-9688ccc493e1" />
 
 **Nuomininkas sumokėjo 1 ETH depozitą:**
+
 <img width="400" alt="balance 1 ETH" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
 
 Savininkas patvirtina, kad inventorius išduotas.
 **Patvirtinimas sėkmingas: **
+
 <img width="900" alt="markIssued call" src="https://github.com/user-attachments/assets/30f3112e-f220-4658-a865-a8815a5a2c47" />
 
 ### 5.4 confirmReturn() – Inspektoriaus tikrinimas
@@ -138,9 +146,11 @@ Savininkas patvirtina, kad inventorius išduotas.
 Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = false).
 
 **confirmReturn(false) iškvieta:**
+
 <img width="450" alt="confirmReturn false" src="https://github.com/user-attachments/assets/2035cc53-c541-4f80-bdc1-ed368bde088e" />
 
 **Transakcija sėkminga:**
+
 <img width="900" alt="transaction success" src="https://github.com/user-attachments/assets/1efa9531-b72d-4cba-b322-6bcfd89a545b" />
 
 ### 5.5 complete() – Depozito grąžinimas nuomininkui
@@ -150,9 +160,11 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 **complete() iškvieta:**
+
 <img width="900" alt="complete call" src="https://github.com/user-attachments/assets/dfa65ca0-4c52-4fa9-8c97-214cf015a04f" />
 
 **Rezultatas:** Renter atgavo 1 ETH depozitą
+
 <img width="400" alt="balance 0 ETH" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
 
 
@@ -163,12 +175,15 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **confirmReturn(true) iškvieta:**
+
 <img width="450" alt="confirmReturn true" src="https://github.com/user-attachments/assets/eab08a44-972f-49f4-8dac-51c9d8c2117c" />
 
 **completeDamaged() iškviesta sėkmingai:**
+
 <img width="900" alt="completeDamaged call" src="https://github.com/user-attachments/assets/a209bb28-a4a6-4c50-be24-30c2d9f51aff" />
 
 **Rezultatas:** Owner gavo 1 ETH kompensaciją, Renter neatgavo
+
 <img width="400" alt="Owner receives deposit" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
 
 
@@ -180,19 +195,138 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 Po lokalaus testavimo deploy'inau į **Sepolia testnet**:
 
 **Procesas:**
-1. MetaMask perjungimas į Sepolia
-2. Test ETH gavimas: https://sepolia-faucet.pk910.de/
-3. Remix → Injected Provider
-4. Deploy ir funkcijų iškvietimas
-5. Patikrinimas Etherscan'e
+1. Susikūriau MetaMask accounta ir perjungiau į Sepolia
+
+<img width="1320" height="1309" alt="image" src="https://github.com/user-attachments/assets/b6a911ff-6325-4402-aa4f-3704b03c20d4" />
+
+2. Sukūriau 3 accountus:
+
+<img width="1242" height="695" alt="image" src="https://github.com/user-attachments/assets/ff7e36fe-4004-4454-9455-5c4ccd2e50ac" />
+
+3. Test ETH mininau iš: https://sepolia-faucet.pk910.de/
+
+<img width="400" height="1459" alt="Screenshot 2025-12-09 202837" src="https://github.com/user-attachments/assets/9509b216-f812-41c8-97a7-635189a01b42" />
+Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui mažiau, kad tiesiog būtų ant gazo.
+
+4. Remix → Injected Provider
+   
+<img width="591" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+Kas kart reikėjo MetaMask'e perjungti aktyvų account'ą, kad galėčiau jį naudoti Remix'e.
+
+5. Testavimas
+
+### Pradinės sumos
+
+Renter:
+Owner:
+Inspector:
+
+### Konfiguracijos
+
+Deposit:
+Custom gas limit:
+
+### 5.1 Deploy
+
+Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
+
+**Konfiguracijos:**
+
+img
+
+**Pakeičiau į Inspector account'ą:**
+
+img
+
+**Contract sėkmingas:**
+
+img
+
+### 5.2 rent() – Depozito mokėjimas
+
+**Mokėjimas sėkmingas:**
+
+img
+
+**Nuomininkas sumokėjo 1 ETH depozitą:**
+
+img
+
+### 5.3 markIssued() – Išdavimo patvirtinimas
+
+Savininkas patvirtina, kad inventorius išduotas.
+**Patvirtinimas sėkmingas: **
+
+img
+
+### 5.4 confirmReturn() – Inspektoriaus tikrinimas
+
+#### Scenarijus 1: Inventorius tvarkingas ✅
+
+Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = false).
+
+**confirmReturn(false) iškvieta:**
+
+img
+
+**Transakcija sėkminga:**
+
+img
+
+### 5.5 complete() – Depozito grąžinimas nuomininkui
+
+#### Scenarijus 1: Depozito grąžinimas ✅
+
+Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
+
+**complete() iškvieta:**
+
+img
+
+**Rezultatas:** Renter atgavo x ETH depozitą
+
+img
+
+### Galutinės sumos
+
+Renter:
+Owner:
+Inspector:
+
+
+### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
+
+#### Scenarijus 2: Inventorius sugadintas ❌
+
+Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
+
+**confirmReturn(true) iškvieta:**
+
+img
+
+**completeDamaged() iškviesta sėkmingai:**
+
+img
+
+**Rezultatas:** Owner gavo x ETH kompensaciją, Renter neatgavo
+
+img
+
+### Galutinės sumos
+
+Renter:
+Owner:
+Inspector:
+
 
 ---
 
-## 7. Etherscan logai
+## 7. Etherscan logai 
 
-Visos transakcijos matomos Etherscan'e:
+Naudojau: https://sepolia.etherscan.io/
+Visos transakcijos matomos Etherscan'e (prijungiau tik kai jau su MetaMask dariau):
 
-![Etherscan](docs/etherscan.png)
+img
 
 ---
 
