@@ -1,157 +1,251 @@
-📦 GoodsSale – Smart Contract + Decentralized Application
-Laboratorinis darbas Nr. 4 · Ethereum · Solidity · DApp
-📌 1. Projekto paskirtis
+# SportRent – Sporto Inventoriaus Nuomos Sutartis
 
-Šis projektas įgyvendina saugų decentralizuotą prekių pirkimo–pardavimo procesą, pagrįstą „escrow“ principu.
-Lėšos laikomos išmaniojoje sutartyje, kol pirkėjas patvirtina, kad prekė gauta.
-Taip užtikrinama, kad:
+**Laboratorinis darbas Nr. 4** · Blockchain · Ethereum · Solidity
 
-🚫 Pardavėjas negali pasiimti pinigų prieš laiką
+---
 
-🚫 Pirkėjas negali neatlikti apmokėjimo po pristatymo
+## 1. Trumpas aprašymas
 
-🚫 Kurjeris negali patvirtinti neteisingo pristatymo
+Šiame projekte sukūriau išmaniąją sutartį sporto inventoriaus nuomai. Naudojau **escrow** logiką - saugų atsiskaitymą per smart contract, kad nei savininkas, nei nuomininkas nerizikuotų prarasti pinigų ar inventoriaus.
 
-✔ Procesas vyksta viešame blockchain tinkle, garantuojant vientisumą
+**Realaus pasaulio panaudojimo atvejai:**
+- ⛷️ **Slidinėjimo įrangos nuoma** slidinėjimo kurorte
+- 🏄 **Banglentių nuoma** atostogų metu paplūdimyje
+- 🚴 **Dviračių nuoma** turistams mieste
+- 🎾 **Teniso rakės nuoma** turnyrui ar treniruotei
 
-Ši logika padeda suprasti realias Web3 taikymo galimybes praktikoje.
+Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia testnet**. Pridėjau **DApp** su MetaMask integracija.
 
-🧭 2. Verslo modelio dalyviai
-Rolė	Aprašymas
-Seller	Parduoda prekę, įkelia kainą, nurodo kurjerį
-Buyer	Atlieka mokėjimą ir patvirtina gavimą
-Courier	Pažymi, kad pristatė prekę
-Contract	Laiko pinigus ir valdo būsenas
-🔄 3. Proceso eiga
+---
 
-Seller deployina kontraktą, nurodo:
-• kainą (price)
-• kurjerio adresą
+## 2. Verslo modelis
 
-Buyer atlieka apmokėjimą (pay())
-→ kontraktas pereina į Paid būseną
+### Pagrindiniai veikėjai
 
-Seller pažymi išsiuntimą (markShipped())
-→ būklė tampa Shipped
+| Rolė | Atsakomybės |
+|------|-------------|
+| **Owner** | Inventoriaus savininkas. Sukuria nuomos pasiūlymą, išduoda inventorių, gauna kompensaciją jei sugadinta. |
+| **Renter** | Nuomininkas. Sumoka depozitą, naudoja inventorių, gauna pinigus atgal jei grąžina tvarkingai. |
+| **Inspector** | Nepriklausomas tikrintojas. Apžiūri grąžintą inventorių ir nusprendžia: tvarkingas ar sugadintas. |
 
-Courier pažymi pristatymą (markDelivered())
-→ būklė tampa Delivered
+### Tipiniai scenarijai
 
-Buyer patvirtina gavimą (confirmReceived())
-→ kontraktas perveda pinigus Seller'iui
-→ būsena tampa Completed
+**Scenarijus A: Sėkmingas procesas**
+1. Owner sukuria pasiūlymą (depozitas + inspector adresas)
+2. Renter sumoka depozitą → pinigai užšąla contract'e
+3. Owner išduoda inventorių (pvz., teniso raketę)
+4. Renter naudoja 3 dienas ir grąžina
+5. Inspector apžiūri → viskas tvarkingas
+6. Owner užbaigia → Renter gauna depozitą atgal ✅
 
-🧩 4. Sekų (sequence) diagrama
+**Scenarijus B: Sugadintas inventorius**
+1-4. [Kaip Scenarijus A]
+5. Inspector apžiūri → randa pažeidimą
+6. Owner užbaigia → Owner gauna depozitą kaip kompensaciją ❌
 
-👉 Įkelk savo PNG failą į docs/sequence.png
+---
+
+## 3. Sekų diagrama
 
 ![Sequence Diagram](docs/sequence.png)
 
+### ASCII sekų schema:
 
-UML kodas (naudota generavimui):
+```
+┌─────────┐          ┌─────────┐          ┌───────────┐          ┌──────────────┐
+│  Owner  │          │ Renter  │          │ Inspector │          │   Contract   │
+└────┬────┘          └────┬────┘          └─────┬─────┘          └──────┬───────┘
+     │                    │                     │                       │
+     ├─────── (1) constructor(deposit, inspector) ──────────────────────>│
+     │                    │                     │              state = Created
+     │<────────────────── Contract Address ────────────────────────────┤
+     │                    │                     │                       │
+     │                    ├─── (2) rent() + deposit ETH ───────────────>│
+     │                    │                     │         renter = msg.sender
+     │                    │                     │              state = Rented
+     │                    │<────── Deposit Locked ──────────────────────┤
+     │                    │                     │                       │
+     ├── (3) 🎾 Fiziškai išduoda inventorių ───>│                       │
+     ├────────────── markIssued() ──────────────────────────────────────>│
+     │                    │                     │              state = Issued
+     │<───────────── Issue Confirmed ──────────────────────────────────┤
+     │                    │                     │                       │
+     │<────── (4) 🎾 Fiziškai grąžina ──────────┤                       │
+     │                    │                     │                       │
+     │                    │      ┌──────────────┴───────────────┐       │
+     │                    │      │ Inspector apžiūri fiziškai   │       │
+     │                    │      └──────────────┬───────────────┘       │
+     │                    │                     │                       │
+     │                    │         ┌─────── (5) confirmReturn(false) ──>│  [TVARKINGAS]
+     │                    │         │           │         state = ReturnedOk
+     │────────── (6A) complete() ──┼───────────┼───────────────────────>│
+     │                    │         │           │         state = Completed
+     │                    │<────────┼───────────┼── 💰 deposit ETH ─────┤  Refund!
+     │                    │         │           │                       │
+     │                    │         └─ (5) confirmReturn(true) ─────────>│  [SUGADINTAS]
+     │                    │                     │       state = ReturnedDamaged
+     ├────────── (6B) completeDamaged() ───────┼───────────────────────>│
+     │                    │                     │         state = Completed
+     │<───────────────────┼─────────────────────┼── 💰 deposit ETH ─────┤  Compensation!
+     │                    │                     │                       │
+     ▼                    ▼                     ▼                       ▼
+```
 
+### PlantUML kodas:
+
+```plantuml
 @startuml
-actor Buyer
-actor Seller
-actor Courier
+actor Owner
+actor Renter
+actor Inspector
 participant Contract
 
-Buyer -> Contract: pay()
-Contract -> Buyer: state = Paid
+Owner -> Contract: constructor(deposit, inspector)
+Contract --> Owner: state = Created
 
-Seller -> Contract: markShipped()
-Contract -> Seller: state = Shipped
+Renter -> Contract: rent() + deposit
+Contract --> Renter: state = Rented
 
-Courier -> Contract: markDelivered()
-Contract -> Courier: state = Delivered
+Owner -> Contract: markIssued()
+Contract --> Owner: state = Issued
 
-Buyer -> Contract: confirmReceived()
-Contract -> Seller: transfer funds
-Contract -> Buyer: state = Completed
+Inspector -> Contract: confirmReturn(damaged)
+alt damaged = false
+    Contract --> Inspector: state = ReturnedOk
+    Owner -> Contract: complete()
+    Contract -> Renter: transfer(deposit)
+else damaged = true
+    Contract --> Inspector: state = ReturnedDamaged
+    Owner -> Contract: completeDamaged()
+    Contract -> Owner: transfer(deposit)
+end
 @enduml
+```
 
-🔐 5. Smart Contract analizė
+### Sekų aprašymai:
 
-Failas: GoodsSale.sol
-Programavimo kalba: Solidity 0.8.30
+**Seka 1: Deploy**
+- Owner iškviečia `constructor()` su depozito suma ir inspector adresu
+- Contract išsaugo parametrus ir nustato `state = Created`
 
-🔸 Kintamieji
+**Seka 2: Nuoma**
+- Renter iškviečia `rent()` ir sumoka depozitą
+- Contract patikrina sumą, išsaugo Renter adresą, nustato `state = Rented`
+- ETH užrakinama contract balance
 
-buyer – pirkėjo adresas
+**Seka 3: Išdavimas**
+- Owner fiziškai išduoda inventorių Renter'iui
+- Owner iškviečia `markIssued()` → `state = Issued`
 
-seller – deploy’eris
+**Seka 4: Grąžinimas**
+- Renter fiziškai grąžina inventorių
+- Inspector apžiūri būklę ir iškviečia `confirmReturn(damaged)`
+- Jei `damaged = false` → `state = ReturnedOk`
+- Jei `damaged = true` → `state = ReturnedDamaged`
 
-courier – kurjerio adresas
+**Seka 5: Užbaigimas**
+- Jei ReturnedOk: Owner iškviečia `complete()` → contract perveda depozitą Renter'iui
+- Jei ReturnedDamaged: Owner iškviečia `completeDamaged()` → contract perveda depozitą Owner'iui
+- `state = Completed`
 
-price – kaina wei vienetais
+---
 
-enum State – būsenų mašina
+## 4. Smart Contract (SportRent.sol)
 
-🔸 Apsaugos
-Rizika	Sprendimas
-Front-running buyer	Buyer = msg.sender nustatomas prieš require
-Netinkama būsena	Kiekviena funkcija naudoja inState() modifier
-Reentrancy	ETH išmokėjimas atliekamas paskutinis
-🧪 6. Lokalus testavimas (Remix VM)
-6.1 Deploy (Seller)
+**Failas:** `contracts/SportRent.sol`
 
-<img width="2123" height="927" alt="image" src="https://github.com/user-attachments/assets/1cf94a14-7d60-47c0-9220-acff5ca25240" />
-<img width="2144" height="680" alt="image" src="https://github.com/user-attachments/assets/d0ea92ef-5a3a-4f90-872b-52f91be4fe57" />
+**Pagrindinės funkcijos:**
+- `constructor(deposit, inspector)` – sukuria pasiūlymą
+- `rent()` – Renter sumoka depozitą
+- `markIssued()` – Owner patvirtina išdavimą
+- `confirmReturn(damaged)` – Inspector tikrina būklę
+- `complete()` – grąžina depozitą Renter (jei OK)
+- `completeDamaged()` – perveda depozitą Owner (jei sugadinta)
 
+**Būsenos:**
+```
+Created → Rented → Issued → ReturnedOk/ReturnedDamaged → Completed
+```
 
-6.2 Buyer → pay()
+---
 
-<img width="2164" height="832" alt="image" src="https://github.com/user-attachments/assets/899bb1a0-5374-4887-bc61-9eadad36de28" />
+## 5. Lokalus testavimas (Remix)
 
-6.3 Seller → markShipped()
+Testavau kontraktą **Remix IDE** su **JavaScript VM**:
 
-<img width="2169" height="290" alt="image" src="https://github.com/user-attachments/assets/97965b89-5921-4bbb-8d49-532a7c0f9dc1" />
+### 5.1 Deploy
+![Deploy](docs/deploy.png)
 
-6.4 Courier → markDelivered()
+### 5.2 rent() – Depozito mokėjimas
+![Rent](docs/rent.png)
 
-<img width="2156" height="336" alt="image" src="https://github.com/user-attachments/assets/247af1b5-3704-47fd-b7f2-c1a507322ca2" />
+### 5.3 markIssued() – Išdavimo patvirtinimas
+![Issued](docs/issued.png)
 
-6.5 Buyer → confirmReceived()
+### 5.4 confirmReturn() – Inspektoriaus tikrinimas
+![Inspect](docs/inspect.png)
 
-<img width="2175" height="858" alt="image" src="https://github.com/user-attachments/assets/4c9cbb1f-521a-4910-99d7-93a2b509a36b" />
+### 5.5 complete() – Pinigų išmokėjimas
+![Complete](docs/complete.png)
 
-6.6 Galutinė būsena
+---
 
-<img width="551" height="1216" alt="image" src="https://github.com/user-attachments/assets/d260c85e-460e-45b1-9159-0764f4d6e613" />
+## 6. Sepolia testnet deployment
 
+Po lokalaus testavimo deploy'inau į **Sepolia testnet**:
 
-🌐 7. Deploy į Ethereum Testnet (Sepolia)
+**Procesas:**
+1. MetaMask perjungimas į Sepolia
+2. Test ETH gavimas: https://sepolia-faucet.pk910.de/
+3. Remix → Injected Provider
+4. Deploy ir funkcijų iškvietimas
+5. Patikrinimas Etherscan'e
 
-(Šį skyrių užpildysime kartu — aš tau padėsiu.)
+---
 
-Kontrakto adresas:
+## 7. Etherscan logai
 
-Etherscan nuoroda:
+Visos transakcijos matomos Etherscan'e:
 
-Transakcijų hash’ai:
+![Etherscan](docs/etherscan.png)
 
-Deploy
+---
 
-pay()
+## 8. DApp (Front-End)
 
-markShipped()
+Sukūriau minimalistinį `index.html` failą, kuris leidžia:
+- Prisijungti per MetaMask
+- Įvesti contract'o adresą
+- Iškviesti funkcijas: `rent()`, `markIssued()`, `confirmReturn()`, `complete()`
 
-markDelivered()
+![Frontend](docs/frontend.png)
 
-confirmReceived()
+**Technologijos:**
+- MetaMask
+- ethers.js
+- HTML + JavaScript
 
-🖥 8. Front-End aplikacija (index.html)
+---
 
-Aplikacija leidžia:
+## 9. Kaip paleisti
 
-Prisijungti prie MetaMask
+### Smart Contract:
+1. Atidaryti **Remix IDE** → https://remix.ethereum.org
+2. Įkelti `contracts/SportRent.sol`
+3. Compile (Solidity 0.8.x)
+4. Deploy:
+   - **JavaScript VM** – lokalus testavimas
+   - **Sepolia** – per MetaMask
 
-Įvesti kontrakto adresą
+### DApp:
+1. Atidaryti `index.html` naršyklėje
+2. Connect Wallet (MetaMask)
+3. Įvesti contract'o adresą
+4. Naudotis funkcijomis
 
-Vykdyti 4 funkcijas
+---
 
-Matyti būsenos pokyčius
+**Autorius:** Nedas  
+**Projektas:** Blockchain laboratorinis darbas  
+**Data:** 2025-12
 
-👉 Įkelk screenshot:
-
-docs/frontend.png
