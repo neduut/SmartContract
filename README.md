@@ -48,7 +48,8 @@ Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia t
 ## 3. Sekų diagrama
 
 ![Sequence Diagram](img/seku_diagrama.png)
-Pqarašiau PlantUML kodą ir generavau su: https://plantuml.com/
+
+Parašiau PlantUML kodą ir generavau su: https://plantuml.com/
 
 ### Sekų aprašymai:
 
