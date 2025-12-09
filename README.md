@@ -48,7 +48,7 @@ Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia t
 ## 3. Sekų diagrama
 
 ![Sequence Diagram](img/seku_diagrama.png)
-
+Pqarašiau PlantUML kodą ir generavau su: https://plantuml.com/
 
 ### Sekų aprašymai:
 
@@ -171,9 +171,4 @@ Sukūriau minimalistinį `index.html` failą, kuris leidžia:
 3. Įvesti contract'o adresą
 4. Naudotis funkcijomis
 
----
-
-**Autorius:** Nedas  
-**Projektas:** Blockchain laboratorinis darbas  
-**Data:** 2025-12
 
