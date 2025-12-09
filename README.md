@@ -104,21 +104,43 @@ Testavau kontraktą **Remix IDE** su **JavaScript VM**:
 
 
 ### 5.1 Deploy
-<img width="530" height="291" alt="image" src="https://github.com/user-attachments/assets/7bcb8893-9595-49b5-a60d-2590c296aa53" />
-<img width="2137" height="885" alt="image" src="https://github.com/user-attachments/assets/e88a454f-76e2-4202-a6e4-77e394c9f006" />
-<img width="2123" height="872" alt="image" src="https://github.com/user-attachments/assets/3eec2763-d3ed-40df-8d1c-9635250e0fcd" />
+<img width="494" height="728" alt="image" src="https://github.com/user-attachments/assets/de7c24a1-8299-4726-9760-706ec56e9b27" />
+
+<img width="516" height="496" alt="image" src="https://github.com/user-attachments/assets/0585c272-9bb8-422f-b3f0-1031e8a6e1b6" />
+<img width="1495" height="75" alt="image" src="https://github.com/user-attachments/assets/e95b7ec0-afa6-4230-b8a7-899c7c5b58ac" />
 
 ### 5.2 rent() – Depozito mokėjimas
-![Rent](docs/rent.png)
+<img width="1856" height="98" alt="image" src="https://github.com/user-attachments/assets/b68b25c9-2ef3-4510-ba7e-9688ccc493e1" />
+<img width="484" height="226" alt="image" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
+
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
-![Issued](docs/issued.png)
+<img width="1641" height="98" alt="image" src="https://github.com/user-attachments/assets/30f3112e-f220-4658-a865-a8815a5a2c47" />
+
 
 ### 5.4 confirmReturn() – Inspektoriaus tikrinimas
-![Inspect](docs/inspect.png)
+Scenarijus 1 – inventorius tvarkingas (damaged = false
+):
+<img width="505" height="285" alt="image" src="https://github.com/user-attachments/assets/2035cc53-c541-4f80-bdc1-ed368bde088e" />
 
-### 5.5 complete() – Pinigų išmokėjimas
-![Complete](docs/complete.png)
+<img width="1746" height="88" alt="image" src="https://github.com/user-attachments/assets/1efa9531-b72d-4cba-b322-6bcfd89a545b" />
+
+### 5.5 complete() – Pinigų grąžinimas
+<img width="1590" height="96" alt="image" src="https://github.com/user-attachments/assets/dfa65ca0-4c52-4fa9-8c97-214cf015a04f" />
+<img width="497" height="294" alt="image" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
+Renter atgavo 1 ETH.
+
+Scenarijus 2 – inventorius sugadintas (damaged = true
+):
+<img width="498" height="289" alt="image" src="https://github.com/user-attachments/assets/eab08a44-972f-49f4-8dac-51c9d8c2117c" />
+<img width="1717" height="116" alt="image" src="https://github.com/user-attachments/assets/a209bb28-a4a6-4c50-be24-30c2d9f51aff" />
+
+
+### 5.5 complete() – Pinigai negrąžinami
+<img width="1737" height="96" alt="image" src="https://github.com/user-attachments/assets/c63f15ff-5979-4f8e-ab5c-9ce9b3c93f80" />
+<img width="482" height="206" alt="image" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
+Renter neatgavo 1 ETH, o Sporto parduotuvė užsidirbo 1 ETH.
+
 
 ---
 
