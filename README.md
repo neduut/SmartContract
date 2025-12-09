@@ -48,7 +48,8 @@ Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia t
 ## 3. Sekų diagrama
 
 ![Sequence Diagram](img/seku_diagrama.png)
-Pqarašiau PlantUML kodą ir generavau su: https://plantuml.com/
+
+Parašiau PlantUML kodą ir generavau su: https://plantuml.com/
 
 ### Sekų aprašymai:
 
@@ -190,12 +191,23 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 Po lokalaus testavimo deploy'inau į **Sepolia testnet**:
 
 **Procesas:**
-1. MetaMask perjungimas į Sepolia
-2. Test ETH gavimas: https://sepolia-faucet.pk910.de/
+1. Susikūriau MetaMask accounta ir perjungiau į Sepolia
+
+<img width="1320" height="1309" alt="image" src="https://github.com/user-attachments/assets/b6a911ff-6325-4402-aa4f-3704b03c20d4" />
+
+2. Sukūriau 3 accountus:
+
+<img width="1242" height="695" alt="image" src="https://github.com/user-attachments/assets/ff7e36fe-4004-4454-9455-5c4ccd2e50ac" />
+
+3. Test ETH mininau iš: https://sepolia-faucet.pk910.de/
 
 <img width="400" height="1459" alt="Screenshot 2025-12-09 202837" src="https://github.com/user-attachments/assets/9509b216-f812-41c8-97a7-635189a01b42" />
+Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui mažiau, kad tiesiog būtų ant gazo.
 
 4. Remix → Injected Provider
+   
+<img width="591" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+
 5. Deploy ir funkcijų iškvietimas
 6. Patikrinimas Etherscan'e
 
