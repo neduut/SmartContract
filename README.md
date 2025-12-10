@@ -38,14 +38,17 @@ Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia t
 1. Owner sukuria pasiūlymą (depozitas + inspector adresas)
 2. Renter sumoka depozitą → pinigai užšąla contract'e
 3. Owner išduoda inventorių (pvz., teniso raketę)
-4. Renter naudoja 3 dienas ir grąžina
-5. Inspector apžiūri → viskas tvarkingas
-6. Owner užbaigia → Renter gauna depozitą atgal ✅
+4. Renter naudoja x dienų ir grąžina
+5. Inspector apžiūri → **inventorius tvarkingas**
+6. Owner užbaigia → **Renter gauna depozitą atgal** ✅
 
 **Scenarijus B: Sugadintas inventorius**
-1-4. [Kaip Scenarijus A]
-5. Inspector apžiūri → randa pažeidimą
-6. Owner užbaigia → Owner gauna depozitą kaip kompensaciją ❌
+1. Owner sukuria pasiūlymą (depozitas + inspector adresas)
+2. Renter sumoka depozitą → pinigai užšąla contract'e
+3. Owner išduoda inventorių (pvz., teniso raketę)
+4. Renter naudoja x dienų ir grąžina
+5. Inspector apžiūri → **randa pažeidimą**
+6. Owner užbaigia → **Owner gauna depozitą kaip kompensaciją** ❌
 
 ---
 
@@ -112,11 +115,11 @@ Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 
 **Konfiguracijos:**
 
-<img width="450" alt="Remix compile" src="https://github.com/user-attachments/assets/10fb4565-ad19-4f0f-95ed-a3df05cfdcc1" />
+<img width="300" alt="Remix compile" src="https://github.com/user-attachments/assets/10fb4565-ad19-4f0f-95ed-a3df05cfdcc1" />
 
-**Inspector pasirinktas 2 account:**
+**Inspector pasirinktas kaip 2 account'as:**
 
-<img width="450" alt="Deploy success" src="https://github.com/user-attachments/assets/0585c272-9bb8-422f-b3f0-1031e8a6e1b6" />
+<img width="300" alt="Deploy success" src="https://github.com/user-attachments/assets/0585c272-9bb8-422f-b3f0-1031e8a6e1b6" />
 
 **Contract sėkmingas:**
 
@@ -126,11 +129,11 @@ Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 
 **Mokėjimas sėkmingas:**
 
-<img width="900" alt="rent call" src="https://github.com/user-attachments/assets/b68b25c9-2ef3-4510-ba7e-9688ccc493e1" />
+<img width="300" alt="rent call" src="https://github.com/user-attachments/assets/b68b25c9-2ef3-4510-ba7e-9688ccc493e1" />
 
 **Nuomininkas sumokėjo 1 ETH depozitą:**
 
-<img width="400" alt="balance 1 ETH" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
+<img width="300" alt="balance 1 ETH" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
 
@@ -147,7 +150,7 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 
 **confirmReturn(false) iškvieta:**
 
-<img width="450" alt="confirmReturn false" src="https://github.com/user-attachments/assets/2035cc53-c541-4f80-bdc1-ed368bde088e" />
+<img width="300" alt="confirmReturn false" src="https://github.com/user-attachments/assets/2035cc53-c541-4f80-bdc1-ed368bde088e" />
 
 **Transakcija sėkminga:**
 
@@ -165,7 +168,7 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 **Rezultatas:** Renter atgavo 1 ETH depozitą
 
-<img width="400" alt="balance 0 ETH" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
+<img width="300" alt="balance 0 ETH" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
 
 
 ### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
@@ -176,7 +179,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **confirmReturn(true) iškvieta:**
 
-<img width="450" alt="confirmReturn true" src="https://github.com/user-attachments/assets/eab08a44-972f-49f4-8dac-51c9d8c2117c" />
+<img width="300" alt="confirmReturn true" src="https://github.com/user-attachments/assets/eab08a44-972f-49f4-8dac-51c9d8c2117c" />
 
 **completeDamaged() iškviesta sėkmingai:**
 
@@ -184,9 +187,9 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **Rezultatas:** Owner gavo 1 ETH kompensaciją, Renter neatgavo
 
-<img width="400" alt="Owner receives deposit" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
+<img width="300" alt="Owner receives deposit" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
 
-
+Gas taip pat yra nuskaičiuojamas, tai matosi iš Inspector sąskaitos.
 
 ---
 
@@ -197,30 +200,33 @@ Po lokalaus testavimo deploy'inau į **Sepolia testnet**:
 **Procesas:**
 1. Susikūriau MetaMask accounta ir perjungiau į Sepolia
 
-<img width="1320" height="1309" alt="image" src="https://github.com/user-attachments/assets/b6a911ff-6325-4402-aa4f-3704b03c20d4" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/b6a911ff-6325-4402-aa4f-3704b03c20d4" />
 
 2. Sukūriau 3 accountus:
 
-<img width="1242" height="695" alt="image" src="https://github.com/user-attachments/assets/ff7e36fe-4004-4454-9455-5c4ccd2e50ac" />
+<img width="300"alt="image" src="https://github.com/user-attachments/assets/ff7e36fe-3004-4454-9455-5c4ccd2e50ac" />
 
 3. Test ETH mininau iš: https://sepolia-faucet.pk910.de/
 
-<img width="400" height="1459" alt="Screenshot 2025-12-09 202837" src="https://github.com/user-attachments/assets/9509b216-f812-41c8-97a7-635189a01b42" />
+<img width="300" alt="Screenshot 2025-12-09 202837" src="https://github.com/user-attachments/assets/9509b216-f812-41c8-97a7-635189a01b42" />
+
 Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui mažiau, kad tiesiog būtų ant gazo.
 
 4. Remix → Injected Provider
    
-<img width="400" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+
 Kas kart reikėjo MetaMask'e perjungti aktyvų account'ą, kad galėčiau jį naudoti Remix'e.
 
 5. Testavimas
 
-### Pradinės sumos
+Rolė | Pradinės sumos | 
+|------|-----------------|
+| Renter | 0.1147 ETH |
+| Owner | 0.0935 ETH |
+| Inspector | 0.0578 ETH |
 
-Renter: 0.1147 ETH
-Owner: 0.0935 ETH
-Inspector: 0.0578 ETH
-<img width="400" height="779" alt="image" src="https://github.com/user-attachments/assets/25e424d1-36f1-4d07-832f-093a677d1e92" />
+<img width="300" height="779" alt="image" src="https://github.com/user-attachments/assets/25e424d1-36f1-4d07-832f-093a677d1e92" />
 
 ### 5.1 Deploy
 
@@ -229,7 +235,8 @@ Inspector: 0.0578 ETH
 Deposit: 0.05 ETH
 
 **MetaMask patvirtinimas:**
-<img width="787" height="1234" alt="image" src="https://github.com/user-attachments/assets/b08d01ee-04dc-4a96-8a45-1e2864da953b" />
+
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/b08d01ee-04dc-4a96-8a45-1e2864da953b" />
 
 **Contract sėkmingas:**
 
@@ -238,7 +245,8 @@ Deposit: 0.05 ETH
 ### 5.2 rent() – Depozito mokėjimas
 
 **MetaMask patvirtinimas:**
-<img width="811" height="1244" alt="image" src="https://github.com/user-attachments/assets/ebe88897-0adc-420c-89d6-556ae8b917bc" />
+
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/ebe88897-0adc-420c-89d6-556ae8b917bc" />
 
 **Mokėjimas sėkmingas:**
 
@@ -246,7 +254,7 @@ Deposit: 0.05 ETH
 
 **Nuomininkas sumokėjo 0.05 ETH depozitą:**
 
-<img width="501" height="564" alt="image" src="https://github.com/user-attachments/assets/b3d606c7-bdb8-4dbd-bf30-614e743f539e" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/b3d606c7-bdb8-4dbd-bf30-614e743f539e" />
 
 <img width="1200" height="197" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
 
@@ -256,7 +264,7 @@ Deposit: 0.05 ETH
 Savininkas patvirtina, kad inventorius išduotas.
 **MetaMask patvirtinimas:**
 
-<img width="789" height="1232" alt="image" src="https://github.com/user-attachments/assets/73c8ea8e-cfeb-4f01-9909-4c45a297725d" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/73c8ea8e-cfeb-4f01-9909-4c45a297725d" />
 
 **Patvirtinimas sėkmingas:**
 
@@ -271,11 +279,12 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 
 **confirmReturn(false) iškvieta:**
 
-<img width="513" height="738" alt="image" src="https://github.com/user-attachments/assets/29f86702-7b59-43b6-9e24-05ddbeea0897" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/29f86702-7b59-43b6-9e24-05ddbeea0897" />
+
 
 **MetaMask patvirtinimas:**
 
-<img width="777" height="1235" alt="image" src="https://github.com/user-attachments/assets/c319544a-948d-4b58-8892-93c5ebea8773" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/c319544a-948d-4b58-8892-93c5ebea8773" />
 
 
 **Transakcija sėkminga:**
@@ -291,7 +300,7 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 **MetaMask patvirtinimas:**
 
-<img width="753" height="1211" alt="image" src="https://github.com/user-attachments/assets/bd922c2a-a036-4a1c-955a-98acc2d0b932" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/bd922c2a-a036-4a1c-955a-98acc2d0b932" />
 
 **Transakcija sėkminga:**
 
@@ -299,17 +308,20 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 **Rezultatas:** Renter atgavo 0.05 ETH depozitą
 
-<img width="1223" height="264" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
 
-### Galutinės sumos
-_**Taip pat pradinės sumos, naudojamos antram scenarijui**_
+### Sumų palyginimas
 
-Renter: 0.01146 ETH
-Owner: 0.0919 ETH
-Inspector: 0.0578 ETH
+| Rolė | Pradinės sumos | Galutinės sumos |
+|----------|----------------|---------------------|
+| Renter | 0.1147 ETH | 0.01146 ETH |
+| Owner | 0.0935 ETH | 0.0919 ETH |
+| Inspector | 0.0578 ETH | 0.0578 ETH |
 
-<img width="515" height="493" alt="image" src="https://github.com/user-attachments/assets/67ea728f-bf25-48e3-aad1-e9a5e9585b8b" />
 
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/67ea728f-bf25-48e3-aad1-e9a5e9585b8b" />
+
+_*Galutinės sumos = pradinės sumos, naudojamos antram scenarijui_
 
 ### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
 
@@ -319,7 +331,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **confirmReturn(true) iškvieta:**
 
-<img width="482" height="633" alt="image" src="https://github.com/user-attachments/assets/1e460a47-e512-4fee-a367-9eb83a3a754a" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/1e460a47-e512-4fee-a367-9eb83a3a754a" />
 
 <img width="2124" height="104" alt="image" src="https://github.com/user-attachments/assets/13ccd80c-5262-42fb-bace-4bd48eeeadf8" />
 
@@ -331,18 +343,20 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **Rezultatas:** Owner gavo 0.05 ETH kompensaciją, Renter neatgavo
 
-<img width="811" height="1244" alt="image" src="https://github.com/user-attachments/assets/41a79b63-95ce-425c-869e-0781f3b6a01b" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/41a79b63-95ce-425c-869e-0781f3b6a01b" />
 
-<img width="1191" height="193" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
 
 
-### Galutinės sumos
+### Sumų palyginimas
 
-Renter: 0.1403 ETH
-Owner: 0.0645 ETH
-Inspector: 0.0578 ETH
+| Rolė | Pradinės sumos | Galutinės sumos |
+|----------|----------------|---------------------|
+| Renter | 0.01146 ETH | 0.1403 ETH |
+| Owner | 0.0919 | 0.0645 ETH |
+| Inspector | 0.0578 ETH | 0.0578 ETH |
 
-<img width="512" height="525" alt="image" src="https://github.com/user-attachments/assets/5d26624b-c458-4544-935a-ae21d08ffdfc" />
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/5d26624b-c458-4544-935a-ae21d08ffdfc" />
 
 ---
 
@@ -372,7 +386,7 @@ Sutartis pervedė nuomotojui 0.05 ETH
 
 ## 8. DApp (Front-End)
 
-Sukūriau minimalistinį `index.html` failą, kuris leidžia:
+Sukūriau `index.html` failą, kuris leidžia:
 - Prisijungti per MetaMask
 - Įvesti contract'o adresą
 - Iškviesti funkcijas: `rent()`, `markIssued()`, `confirmReturn()`, `complete()`
