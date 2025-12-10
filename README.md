@@ -10,7 +10,7 @@
 
 Naudojau **escrow** logiką - užtikrinamas saugus atsiskaitymas per smart contract, kad nei savininkas, nei nuomininkas nerizikuotų prarasti pinigų ar inventoriaus.
 
-_Escrow = tarpininkas, kuris laiko pinigus, kol abi pusės įvykdo savo įsipareigojimus_
+_(Escrow = tarpininkas, kuris laiko pinigus, kol abi pusės įvykdo savo įsipareigojimus)_
 
 **Realaus pasaulio panaudojimo atvejai:**
 - ⛷️ **Slidinėjimo įrangos nuoma** slidinėjimo kurorte
