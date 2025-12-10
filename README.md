@@ -210,54 +210,61 @@ Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui 
 
 4. Remix → Injected Provider
    
-<img width="591" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
+<img width="400" height="663" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
 Kas kart reikėjo MetaMask'e perjungti aktyvų account'ą, kad galėčiau jį naudoti Remix'e.
 
 5. Testavimas
 
 ### Pradinės sumos
 
-Renter:
-Owner:
-Inspector:
-
-### Konfiguracijos
-
-Deposit:
-Custom gas limit:
+Renter: 0.1147 ETH
+Owner: 0.0935 ETH
+Inspector: 0.0578 ETH
+<img width="400" height="779" alt="image" src="https://github.com/user-attachments/assets/25e424d1-36f1-4d07-832f-093a677d1e92" />
 
 ### 5.1 Deploy
 
-Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
-
 **Konfiguracijos:**
 
-img
+Deposit: 0.05 ETH
 
-**Pakeičiau į Inspector account'ą:**
-
-img
+**MetaMask patvirtinimas:**
+<img width="787" height="1234" alt="image" src="https://github.com/user-attachments/assets/b08d01ee-04dc-4a96-8a45-1e2864da953b" />
 
 **Contract sėkmingas:**
 
-img
+<img width="2134" height="488" alt="image" src="https://github.com/user-attachments/assets/b8911b50-0f85-4a96-ba9f-c49fb41ba612" />
+
+**Kontrakto adresas:**
+0x2C6441e643C00DDff2EB02Cc03eb06A2014F583c
 
 ### 5.2 rent() – Depozito mokėjimas
 
+**MetaMask patvirtinimas:**
+<img width="811" height="1244" alt="image" src="https://github.com/user-attachments/assets/ebe88897-0adc-420c-89d6-556ae8b917bc" />
+
 **Mokėjimas sėkmingas:**
 
-img
+<img width="2120" height="98" alt="image" src="https://github.com/user-attachments/assets/0a90e05c-d006-4060-8995-33a4423c356b" />
 
-**Nuomininkas sumokėjo 1 ETH depozitą:**
+**Nuomininkas sumokėjo 0.05 ETH depozitą:**
 
-img
+<img width="501" height="564" alt="image" src="https://github.com/user-attachments/assets/b3d606c7-bdb8-4dbd-bf30-614e743f539e" />
+
+<img width="1200" height="197" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
+
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
 
 Savininkas patvirtina, kad inventorius išduotas.
-**Patvirtinimas sėkmingas: **
+**MetaMask patvirtinimas:**
 
-img
+<img width="789" height="1232" alt="image" src="https://github.com/user-attachments/assets/73c8ea8e-cfeb-4f01-9909-4c45a297725d" />
+
+**Patvirtinimas sėkmingas:**
+
+<img width="2141" height="112" alt="image" src="https://github.com/user-attachments/assets/829376c2-c7f0-4c2b-a3b2-b12e8ecc0793" />
+
 
 ### 5.4 confirmReturn() – Inspektoriaus tikrinimas
 
@@ -267,11 +274,17 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 
 **confirmReturn(false) iškvieta:**
 
-img
+<img width="513" height="738" alt="image" src="https://github.com/user-attachments/assets/29f86702-7b59-43b6-9e24-05ddbeea0897" />
+
+**MetaMask patvirtinimas:**
+
+<img width="777" height="1235" alt="image" src="https://github.com/user-attachments/assets/c319544a-948d-4b58-8892-93c5ebea8773" />
+
 
 **Transakcija sėkminga:**
 
-img
+<img width="2164" height="174" alt="image" src="https://github.com/user-attachments/assets/972ab305-7318-4d15-b449-9a73efa8da7d" />
+
 
 ### 5.5 complete() – Depozito grąžinimas nuomininkui
 
@@ -279,19 +292,25 @@ img
 
 Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
-**complete() iškvieta:**
+**MetaMask patvirtinimas:**
 
-img
+<img width="753" height="1211" alt="image" src="https://github.com/user-attachments/assets/bd922c2a-a036-4a1c-955a-98acc2d0b932" />
 
-**Rezultatas:** Renter atgavo x ETH depozitą
+**Transakcija sėkminga:**
 
-img
+<img width="2128" height="124" alt="image" src="https://github.com/user-attachments/assets/6f75e28b-887f-4b45-b832-de2cb25549a5" />
+
+**Rezultatas:** Renter atgavo 0.05 ETH depozitą
+
+<img width="1223" height="264" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
 
 ### Galutinės sumos
 
-Renter:
-Owner:
-Inspector:
+Renter: 0.01146 ETH
+Owner: 0.0919 ETH
+Inspector: 0.0578 ETH
+
+<img width="515" height="493" alt="image" src="https://github.com/user-attachments/assets/67ea728f-bf25-48e3-aad1-e9a5e9585b8b" />
 
 
 ### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
@@ -324,9 +343,15 @@ Inspector:
 ## 7. Etherscan logai 
 
 Naudojau: https://sepolia.etherscan.io/
-Visos transakcijos matomos Etherscan'e (prijungiau tik kai jau su MetaMask dariau):
+Visos transakcijos matomos Etherscan'e (tik kai jau su MetaMask dariau):
 
-img
+**Pirmo scenarijaus (inventorius tvarkingas):**
+
+<img width="2779" height="780" alt="image" src="https://github.com/user-attachments/assets/24c827eb-d667-4f9f-b501-afd737bf1cfa" />
+
+**Antro scenarijaus (inventorius sugadintas):**
+
+
 
 ---
 
