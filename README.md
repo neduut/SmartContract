@@ -235,9 +235,6 @@ Deposit: 0.05 ETH
 
 <img width="2134" height="488" alt="image" src="https://github.com/user-attachments/assets/b8911b50-0f85-4a96-ba9f-c49fb41ba612" />
 
-**Kontrakto adresas:**
-0x2C6441e643C00DDff2EB02Cc03eb06A2014F583c
-
 ### 5.2 rent() – Depozito mokėjimas
 
 **MetaMask patvirtinimas:**
@@ -305,6 +302,7 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 <img width="1223" height="264" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
 
 ### Galutinės sumos
+_**Taip pat pradinės sumos, naudojamos antram scenarijui**_
 
 Renter: 0.01146 ETH
 Owner: 0.0919 ETH
@@ -321,22 +319,30 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 **confirmReturn(true) iškvieta:**
 
-img
+<img width="482" height="633" alt="image" src="https://github.com/user-attachments/assets/1e460a47-e512-4fee-a367-9eb83a3a754a" />
+
+<img width="2124" height="104" alt="image" src="https://github.com/user-attachments/assets/13ccd80c-5262-42fb-bace-4bd48eeeadf8" />
+
 
 **completeDamaged() iškviesta sėkmingai:**
 
-img
+<img width="2172" height="91" alt="image" src="https://github.com/user-attachments/assets/3a1abed9-9f69-48ea-9550-764aa0a20f76" />
 
-**Rezultatas:** Owner gavo x ETH kompensaciją, Renter neatgavo
 
-img
+**Rezultatas:** Owner gavo 0.05 ETH kompensaciją, Renter neatgavo
+
+<img width="811" height="1244" alt="image" src="https://github.com/user-attachments/assets/41a79b63-95ce-425c-869e-0781f3b6a01b" />
+
+<img width="1191" height="193" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
+
 
 ### Galutinės sumos
 
-Renter:
-Owner:
-Inspector:
+Renter: 0.1403 ETH
+Owner: 0.0645 ETH
+Inspector: 0.0578 ETH
 
+<img width="512" height="525" alt="image" src="https://github.com/user-attachments/assets/5d26624b-c458-4544-935a-ae21d08ffdfc" />
 
 ---
 
@@ -346,12 +352,21 @@ Naudojau: https://sepolia.etherscan.io/
 Visos transakcijos matomos Etherscan'e (tik kai jau su MetaMask dariau):
 
 **Pirmo scenarijaus (inventorius tvarkingas):**
+_**Kontrakto adresas: 0x2C6441e643C00DDff2EB02Cc03eb06A2014F583c**_
 
 <img width="2779" height="780" alt="image" src="https://github.com/user-attachments/assets/24c827eb-d667-4f9f-b501-afd737bf1cfa" />
 
+Sutartis grąžino nuomininkui 0.05 ETH
+<img width="2752" height="482" alt="image" src="https://github.com/user-attachments/assets/843c9faf-ef3e-44ec-9843-d05c8ad672de" />
+
+
 **Antro scenarijaus (inventorius sugadintas):**
+_**Kontrakto adresas: 0xb106819991ee15276B4d942225e02A256e10D450**_
 
+<img width="2786" height="776" alt="image" src="https://github.com/user-attachments/assets/3cbf8a28-9909-4bff-9bcd-5113b6a303d3" />
 
+Sutartis pervedė nuomotojui 0.05 ETH
+<img width="2791" height="376" alt="image" src="https://github.com/user-attachments/assets/aa031329-9827-4cf1-a3c5-0a186f3b0225" />
 
 ---
 
