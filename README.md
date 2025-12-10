@@ -13,10 +13,11 @@ Naudojau **escrow** logiką - užtikrinamas saugus atsiskaitymas per smart contr
 _(Escrow = tarpininkas, kuris laiko pinigus, kol abi pusės įvykdo savo įsipareigojimus)_
 
 **Realaus pasaulio panaudojimo atvejai:**
-- ⛷️ **Slidinėjimo įrangos nuoma** slidinėjimo kurorte
-- 🏄 **Banglentių nuoma** atostogų metu paplūdimyje
-- 🚴 **Dviračių nuoma** turistams mieste
-- 🎾 **Teniso rakės nuoma** turnyrui ar treniruotei
+- ⛷️ Slidinėjimo įrangos nuoma
+- 🏄 Banglentių nuoma
+- 🚴 Dviračių nuoma
+- 🎾 Teniso raketės nuoma
+**...**
 
 Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia testnet**. Pridėjau **DApp** su MetaMask integracija.
 
@@ -107,7 +108,7 @@ Created → Rented → Issued → ReturnedOk/ReturnedDamaged → Completed
 
 ## 5. Lokalus testavimas (Remix)
 
-Testavau kontraktą **Remix IDE** su **JavaScript VM**:
+Testavau kontraktą **Remix IDE** su **JavaScript VM (Remix VM/Prague)**:
 
 ### 5.1 Deploy
 
@@ -216,8 +217,6 @@ Renter'iui primininau ~0.1 SepETH depozitui ir gazui. Inspektoriui ir owner'iui 
    
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/860c244e-fce5-45d3-bdf9-21e07f6d399a" />
 
-Kas kart reikėjo MetaMask'e perjungti aktyvų account'ą, kad galėčiau jį naudoti Remix'e.
-
 5. Testavimas
 
 Rolė | Pradinės sumos | 
@@ -256,7 +255,7 @@ Deposit: 0.05 ETH
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/b3d606c7-bdb8-4dbd-bf30-614e743f539e" />
 
-<img width="1200" height="197" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
 
 
 ### 5.3 markIssued() – Išdavimo patvirtinimas
@@ -345,6 +344,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/41a79b63-95ce-425c-869e-0781f3b6a01b" />
 
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
 
 
@@ -366,7 +366,8 @@ Naudojau: https://sepolia.etherscan.io/
 Visos transakcijos matomos Etherscan'e (tik kai jau su MetaMask dariau):
 
 **Pirmo scenarijaus (inventorius tvarkingas):**
-_**Kontrakto adresas: 0x2C6441e643C00DDff2EB02Cc03eb06A2014F583c**_
+
+_Kontrakto adresas: 0x2C6441e643C00DDff2EB02Cc03eb06A2014F583c_
 
 <img width="2779" height="780" alt="image" src="https://github.com/user-attachments/assets/24c827eb-d667-4f9f-b501-afd737bf1cfa" />
 
@@ -375,7 +376,8 @@ Sutartis grąžino nuomininkui 0.05 ETH
 
 
 **Antro scenarijaus (inventorius sugadintas):**
-_**Kontrakto adresas: 0xb106819991ee15276B4d942225e02A256e10D450**_
+
+_Kontrakto adresas: 0xb106819991ee15276B4d942225e02A256e10D450_
 
 <img width="2786" height="776" alt="image" src="https://github.com/user-attachments/assets/3cbf8a28-9909-4bff-9bcd-5113b6a303d3" />
 
