@@ -1,228 +1,123 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>SportRent DApp</title>
-	<link rel="icon" type="image/png" href="img/tab_logo.png">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SportRent DApp</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
 </head>
 <body>
-	<div class="page">
-		<div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-			<img src="img/logo.png" alt="SportRent Logo" style="width: 64px; height: 64px; border-radius: 8px;">
-			<h1 style="font-size: 36px; margin: 0;">SportRent DApp</h1>
-		</div>
-		<div class="card" id="connect-card">
-			<div class="row" style="align-items:center; gap:12px;">
-				<div class="col" style="flex:2 1 260px;">
-					<label>Aktyvus tinklas</label>
-					<div id="network" class="muted">-</div>
-				</div>
-				<div class="col" style="flex:2 1 260px;">
-					<label>Piniginė</label>
-					<div id="account" class="muted">Neprisijungta</div>
-				</div>
-				<div class="col" style="flex:0 0 auto; text-align:right;">
-					<button class="btn" id="connect-btn">Connect MetaMask</button>
-				</div>
-			</div>
-			<div id="connect-msg" class="muted" style="margin-top:8px;"></div>
-		</div>
+  <div class="page">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="img/logo.png" alt="SportRent Logo" style="width: 64px; height: 64px; border-radius: 8px;">
+        <h1 style="font-size: 36px; margin: 0;">SportRent DApp</h1>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <img src="img/account.png" alt="Account" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none'">
+        <span id="account-auth-label" class="muted">Log In to your Meta Mask</span>
+      </div>
+    </div>
 
-		<div class="card">
-			<div class="row">
-				<div class="col">
-					<label>Contract adresas (Sepolia arba JS VM)</label>
-					<input id="contract-address" placeholder="0x..." />
-				</div>
-				<div class="col" style="flex:0 0 auto; align-self:flex-end;">
-					<button class="btn secondary" id="load-btn">Load contract</button>
-				</div>
-			</div>
-			<div class="row" style="margin-top:12px;">
-				<div class="col">
-					<div class="muted">Būsena: <span id="state">-</span></div>
-					<div class="muted">Kontrakto balansas: <span id="contract-balance">-</span></div>
-				</div>
-				<div class="col">
-					<div class="muted">Owner: <span id="owner">-</span></div>
-					<div class="muted">Inspector: <span id="inspector">-</span></div>
-					<div class="muted">Renter: <span id="renter">-</span></div>
-				</div>
-			</div>
-			<div id="status" class="muted" style="margin-top:8px;"></div>
-		</div>
+    <div class="card" id="connect-card">
+      <div class="row" style="align-items:center; gap:12px;">
+        <div class="col" style="flex:2 1 260px;">
+          <label>Aktyvus tinklas</label>
+          <div id="network" class="muted">-</div>
+        </div>
+        <div class="col" style="flex:2 1 260px;">
+          <label>Piniginė</label>
+          <div id="account" class="muted">Neprijungta</div>
+        </div>
+        <div class="col" style="flex:0 0 auto; text-align:right;">
+            <div style="display:flex; gap:8px; justify-content:flex-end;">
+                <button class="btn btn--connect" id="connect-btn">Connect</button>
+            </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <div class="col">
+          <div class="muted">Profilis: <span id="profile">Neprisijungta</span></div>
+        </div>
+        <div class="col">
+          <div class="muted">Rolė: <span id="role">-</span></div>
+        </div>
+      </div>
+      <div id="connect-msg" class="muted" style="margin-top:8px;"></div>
+    </div>
 
-		<div class="card">
-			<h2>Veiksmai</h2>
-			<div class="divider"></div>
-			<div class="row">
-				<div class="col">
-					<label>rent() – įvesk depozitą (ETH)</label>
-					<input id="rent-value" type="number" step="0.0001" placeholder="0.05" />
-					<button class="btn" style="margin-top:8px;" id="rent-btn">Rent</button>
-				</div>
-				<div class="col">
-					<label>markIssued() – Owner</label>
-					<button class="btn" style="margin-top:8px;" id="mark-btn">Patvirtinti išdavimą</button>
-				</div>
-			</div>
-			<div class="row" style="margin-top:12px;">
-				<div class="col">
-					<label>confirmReturn(false) – Inspector (tvarkingas)</label>
-					<button class="btn" style="margin-top:8px;" id="confirm-ok">Grąžinta tvarkingai</button>
-				</div>
-				<div class="col">
-					<label>confirmReturn(true) – Inspector (sugadintas)</label>
-					<button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="confirm-bad">Grąžinta sugadinta</button>
-				</div>
-			</div>
-			<div class="row" style="margin-top:12px;">
-				<div class="col">
-					<label>complete() – Owner (tvarkingas)</label>
-					<button class="btn" style="margin-top:8px;" id="complete-ok">Grąžinti Renter</button>
-				</div>
-				<div class="col">
-					<label>completeDamaged() – Owner (sugadintas)</label>
-					<button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="complete-bad">Kompensacija Owner</button>
-				</div>
-			</div>
-			<div id="action-msg" class="muted" style="margin-top:10px;"></div>
-		</div>
+    <div class="card">
+      <div class="row">
+        <div class="col">
+          <label>Contract adresas (Sepolia arba JS VM)</label>
+          <input id="contract-address" placeholder="0x..." />
+        </div>
+        <div class="col" style="flex:0 0 auto; align-self:flex-end;">
+          <button class="btn secondary" id="load-btn">Load contract</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px;">
+        <div class="col">
+          <div class="muted">Būsena: <span id="state">-</span></div>
+          <div class="muted">Kontrakto balansas: <span id="contract-balance">-</span></div>
+        </div>
+        <div class="col">
+          <div class="muted">Owner: <span id="owner">-</span></div>
+          <div class="muted">Inspector: <span id="inspector">-</span></div>
+          <div class="muted">Renter: <span id="renter">-</span></div>
+        </div>
+      </div>
+      <div id="status" class="muted" style="margin-top:8px;"></div>
+    </div>
 
-		<div class="card">
-			<h2>Logai</h2>
-			<div id="logs" class="muted" style="font-size:13px; white-space:pre-wrap;">-</div>
-		</div>
-	</div>
+    <div class="card">
+      <h2>Veiksmai</h2>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col">
+          <label>rent() - įvesk depozitą (ETH)</label>
+          <input id="rent-value" type="number" step="0.0001" placeholder="0.05" />
+          <button class="btn" style="margin-top:8px;" id="rent-btn">Rent</button>
+        </div>
+        <div class="col">
+          <label>markIssued() - Owner</label>
+          <button class="btn" style="margin-top:8px;" id="mark-btn">Patvirtinti išdavimą</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px;">
+        <div class="col">
+          <label>confirmReturn(false) - Inspector (tvarkingas)</label>
+          <button class="btn" style="margin-top:8px;" id="confirm-ok">Grąžinta tvarkingai</button>
+        </div>
+        <div class="col">
+          <label>confirmReturn(true) - Inspector (sugadintas)</label>
+          <button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="confirm-bad">Grąžinta sugadinta</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px;">
+        <div class="col">
+          <label>complete() - Owner (tvarkingas)</label>
+          <button class="btn" style="margin-top:8px;" id="complete-ok">Grąžinti Renter</button>
+        </div>
+        <div class="col">
+          <label>completeDamaged() - Owner (sugadintas)</label>
+          <button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="complete-bad">Kompensacija Owner</button>
+        </div>
+      </div>
+      <div id="action-msg" class="muted" style="margin-top:10px;"></div>
+    </div>
 
-	<script>
-		const stateMap = ["Created", "Rented", "Issued", "ReturnedOk", "ReturnedDamaged", "Completed"];
+    <div class="card">
+      <h2>Logai</h2>
+      <div id="logs" class="muted" style="font-size:13px; white-space:pre-wrap;">-</div>
+    </div>
+  </div>
 
-		const abi = [
-			{ "inputs": [{"internalType":"uint256","name":"_deposit","type":"uint256"},{"internalType":"address","name":"_inspector","type":"address"}], "stateMutability":"nonpayable", "type":"constructor" },
-			{ "inputs":[],"name":"amount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"deposit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"inspector","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"renter","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"state","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
-			{ "inputs":[],"name":"rent","outputs":[],"stateMutability":"payable","type":"function"},
-			{ "inputs":[],"name":"markIssued","outputs":[],"stateMutability":"nonpayable","type":"function"},
-			{ "inputs":[{"internalType":"bool","name":"damaged","type":"bool"}],"name":"confirmReturn","outputs":[],"stateMutability":"nonpayable","type":"function"},
-			{ "inputs":[],"name":"complete","outputs":[],"stateMutability":"nonpayable","type":"function"},
-			{ "inputs":[],"name":"completeDamaged","outputs":[],"stateMutability":"nonpayable","type":"function"},
-			{ "stateMutability":"payable","type":"receive" },
-			{ "stateMutability":"payable","type":"fallback" }
-		];
-
-		let provider, signer, contract;
-
-		const $ = (id) => document.getElementById(id);
-		const logEl = $("logs");
-		const setLog = (msg) => {
-			const now = new Date().toLocaleTimeString();
-			logEl.textContent = `[${now}] ${msg}\n` + (logEl.textContent || "");
-		};
-
-		async function connect() {
-			if (!window.ethereum) {
-				$("connect-msg").innerHTML = '<span class="error">MetaMask nerasta.</span>';
-				return;
-			}
-			provider = new ethers.BrowserProvider(window.ethereum);
-			await provider.send("eth_requestAccounts", []);
-			signer = await provider.getSigner();
-			const net = await provider.getNetwork();
-			$("network").textContent = `${net.name} (chainId ${net.chainId})`;
-			$("account").textContent = await signer.getAddress();
-			$("connect-msg").innerHTML = '<span class="success">Prisijungta.</span>';
-		}
-
-		async function loadContract() {
-			try {
-				const addr = $("contract-address").value.trim();
-				if (!ethers.isAddress(addr)) throw new Error("Neteisingas adresas");
-				if (!signer) await connect();
-				contract = new ethers.Contract(addr, abi, signer);
-				await refresh();
-				setLog(`Kontraktas užkrautas: ${addr}`);
-				$("status").innerHTML = '<span class="success">Kontraktas paruoštas.</span>';
-			} catch (err) {
-				$("status").innerHTML = `<span class="error">${err.message}</span>`;
-			}
-		}
-
-		async function refresh() {
-			if (!contract) return;
-			const [st, bal, o, i, r] = await Promise.all([
-				contract.state(),
-				provider.getBalance(contract.target),
-				contract.owner(),
-				contract.inspector(),
-				contract.renter(),
-			]);
-			$("state").textContent = stateMap[Number(st)] || st;
-			$("contract-balance").textContent = `${ethers.formatEther(bal)} ETH`;
-			$("owner").textContent = o;
-			$("inspector").textContent = i;
-			$("renter").textContent = r === ethers.ZeroAddress ? '-' : r;
-		}
-
-		async function tx(fn, label) {
-			if (!contract) throw new Error("Pirma užkrauk kontraktą.");
-			$("action-msg").innerHTML = `Vykdoma: ${label} ...`;
-			const tx = await fn();
-			setLog(`${label} → tx: ${tx.hash}`);
-			const receipt = await tx.wait();
-			setLog(`${label} patvirtinta, gasUsed=${receipt.gasUsed}`);
-			await refresh();
-			$("action-msg").innerHTML = `<span class="success">${label} pavyko</span>`;
-		}
-
-		$("connect-btn").onclick = connect;
-		$("load-btn").onclick = loadContract;
-
-		$("rent-btn").onclick = async () => {
-			try {
-				const val = $("rent-value").value || "0";
-				const value = ethers.parseEther(val);
-				await tx(() => contract.rent({ value }), `rent() ${val} ETH`);
-			} catch (err) {
-				$("action-msg").innerHTML = `<span class="error">${err.message}</span>`;
-			}
-		};
-
-		$("mark-btn").onclick = async () => {
-			try { await tx(() => contract.markIssued(), "markIssued()"); }
-			catch (err) { $("action-msg").innerHTML = `<span class="error">${err.message}</span>`; }
-		};
-
-		$("confirm-ok").onclick = async () => {
-			try { await tx(() => contract.confirmReturn(false), "confirmReturn(false)"); }
-			catch (err) { $("action-msg").innerHTML = `<span class="error">${err.message}</span>`; }
-		};
-
-		$("confirm-bad").onclick = async () => {
-			try { await tx(() => contract.confirmReturn(true), "confirmReturn(true)"); }
-			catch (err) { $("action-msg").innerHTML = `<span class="error">${err.message}</span>`; }
-		};
-
-		$("complete-ok").onclick = async () => {
-			try { await tx(() => contract.complete(), "complete()"); }
-			catch (err) { $("action-msg").innerHTML = `<span class="error">${err.message}</span>`; }
-		};
-
-		$("complete-bad").onclick = async () => {
-			try { await tx(() => contract.completeDamaged(), "completeDamaged()"); }
-			catch (err) { $("action-msg").innerHTML = `<span class="error">${err.message}</span>`; }
-		};
-	</script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
-

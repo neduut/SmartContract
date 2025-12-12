@@ -1,6 +1,6 @@
 # SportRent – Sporto Inventoriaus Nuomos Sutartis
 
-**Laboratorinis darbas Nr. 4** · Blockchain · Ethereum · Solidity
+**Laboratorinis darbas Nr. 4** 
 
 ---
 
@@ -255,6 +255,8 @@ Deposit: 0.05 ETH
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/b3d606c7-bdb8-4dbd-bf30-614e743f539e" />
 
+
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
 
 
@@ -345,6 +347,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/41a79b63-95ce-425c-869e-0781f3b6a01b" />
 
 
+
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
 
 
@@ -402,7 +405,15 @@ Sukūriau `index.html` failą, kuris leidžia:
 
 ---
 
-## 9. Kaip paleisti
+## 9. Pastaba dėl naudojamų įrankių
+
+Projektui sąmoningai nenaudojau **Truffle** ar **Ganache**, nes laboratorinis darbas orientuotas į išmaniosios sutarties verslo logiką, jos testavimą ir realų naudojimą per decentralizuotą aplikaciją (DApp).
+
+Testavimas buvo atliktas **Remix IDE** aplinkoje ir **Sepolia testnet**, kas leidžia patikrinti sutarties veikimą realiomis Ethereum tinklo sąlygomis (MetaMask, realūs sandoriai, gas mokesčiai, Etherscan logai).
+
+---
+
+## 10. Kaip paleisti
 
 ### Smart Contract:
 1. Atidaryti **Remix IDE** → https://remix.ethereum.org

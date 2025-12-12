@@ -61,6 +61,17 @@ contract SportRent {
     }
 
     /**
+     * @notice Fallbacks — blokavimas, kad niekas nesiųstų ETH netyčia
+     */
+    receive() external payable {
+        revert("Direct payments not allowed");
+    }
+
+    fallback() external payable {
+        revert("Invalid call");
+    }
+
+    /**
      * @notice Renter sumoka depozitą ir nuomojasi inventorių
      */
     function rent() external payable inState(State.Created) {
@@ -126,16 +137,5 @@ contract SportRent {
         payable(owner).transfer(amount);
 
         emit Completed(owner, amount);
-    }
-
-    /**
-     * @notice Fallbacks — blokavimas, kad niekas nesiųstų ETH netyčia
-     */
-    receive() external payable {
-        revert("Direct payments not allowed");
-    }
-
-    fallback() external payable {
-        revert("Invalid call");
     }
 }

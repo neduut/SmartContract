@@ -1,0 +1,15 @@
+[
+  { "inputs": [{"internalType":"uint256","name":"_deposit","type":"uint256"},{"internalType":"address","name":"_inspector","type":"address"}], "stateMutability":"nonpayable", "type":"constructor" },
+  { "inputs":[],"name":"deposit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  { "inputs":[],"name":"inspector","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  { "inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  { "inputs":[],"name":"renter","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  { "inputs":[],"name":"state","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
+  { "inputs":[],"name":"rent","outputs":[],"stateMutability":"payable","type":"function"},
+  { "inputs":[],"name":"markIssued","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  { "inputs":[{"internalType":"bool","name":"damaged","type":"bool"}],"name":"confirmReturn","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  { "inputs":[],"name":"complete","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  { "inputs":[],"name":"completeDamaged","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  { "stateMutability":"payable","type":"receive" },
+  { "stateMutability":"payable","type":"fallback" }
+]
