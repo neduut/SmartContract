@@ -13,36 +13,36 @@
 </head>
 <body>
   <div class="page">
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px;">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <img src="img/logo.png" alt="SportRent Logo" style="width: 64px; height: 64px; border-radius: 8px;">
-        <h1 style="font-size: 36px; margin: 0;">SportRent DApp</h1>
+    <div class="topbar">
+      <div class="topbar__left">
+        <img src="img/logo.png" alt="SportRent Logo" class="logo" onerror="this.style.display='none'">
+        <h1 class="title-hero">SportRent DApp</h1>
       </div>
-      <div style="display:flex; align-items:center; gap:8px;">
-        <img src="img/account.png" alt="Account" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" onerror="this.style.display='none'">
+      <div class="topbar__right">
+        <img src="img/account.png" alt="Account" class="account-avatar" onerror="this.style.display='none'">
         <span id="account-auth-label" class="muted">Log In to your Meta Mask</span>
       </div>
     </div>
 
     <div class="card" id="connect-card">
-      <div class="row" style="align-items:flex-start; gap:16px;">
-        <div class="col" style="flex:1 1 220px;">
+      <div class="row connect-row">
+        <div class="col flex-1-220">
           <label>Aktyvus tinklas</label>
           <div id="network" class="muted">-</div>
         </div>
-        <div class="col" style="flex:2 1 300px;">
+        <div class="col flex-2-300">
           <label>Piniginė</label>
-          <div id="account" class="muted" style="word-break:break-all;">Neprijungta</div>
+          <div id="account" class="muted word-break">Neprijungta</div>
         </div>
-        <div class="col" style="flex:1 1 180px;">
+        <div class="col flex-1-180">
           <label>Rolė</label>
           <div id="role" class="muted">-</div>
         </div>
-        <div class="col" style="flex:0 0 auto; align-self:center;">
+        <div class="col flex-auto-center">
           <button class="btn btn--connect" id="connect-btn">Connect</button>
         </div>
       </div>
-      <div id="connect-msg" class="muted" style="margin-top:12px;"></div>
+      <div id="connect-msg" class="muted mt-12"></div>
     </div>
 
     <div class="card">
@@ -51,11 +51,11 @@
           <label>Contract adresas (Sepolia arba JS VM)</label>
           <input id="contract-address" placeholder="0x..." />
         </div>
-        <div class="col" style="flex:0 0 auto; align-self:flex-end;">
+        <div class="col flex-auto-end">
           <button class="btn secondary" id="load-btn">Load contract</button>
         </div>
       </div>
-      <div class="row" style="margin-top:12px;">
+      <div class="row mt-12">
         <div class="col">
           <div class="muted">Būsena: <span id="state">-</span></div>
           <div class="muted">Kontrakto balansas: <span id="contract-balance">-</span></div>
@@ -66,53 +66,53 @@
           <div class="muted">Renter: <span id="renter">-</span></div>
         </div>
       </div>
-      <div id="status" class="muted" style="margin-top:8px;"></div>
+      <div id="status" class="muted mt-8"></div>
     </div>
 
     <div class="card">
       <h2>Veiksmai</h2>
       <div class="divider"></div>
-      <div class="row" style="align-items:flex-end;">
-        <div class="col" style="flex:2 1 320px;">
+      <div class="row actions-top">
+        <div class="col flex-2-320">
           <label>Renter sumoka nurodytą depozitą (ETH)</label>
           <input id="rent-value" type="number" step="0.0001" placeholder="0.05" />
         </div>
-        <div class="col" style="flex:0 0 180px;">
-          <button class="btn" style="margin-top:8px; width:100%;" id="rent-btn">Rent</button>
+        <div class="col flex-0-180">
+          <button class="btn full-width mt-8" id="rent-btn">Rent</button>
         </div>
       </div>
-      <div class="row" style="margin-top:12px; align-items:flex-start; gap:12px;">
-        <div class="col" style="flex:0 0 180px;">
+      <div class="row actions-single mt-12">
+        <div class="col flex-0-180">
           <label>markIssued() - Owner</label>
-          <button class="btn" style="margin-top:8px; width:100%;" id="mark-btn">Patvirtinti išdavimą</button>
+          <button class="btn full-width mt-8" id="mark-btn">Patvirtinti išdavimą</button>
         </div>
       </div>
-      <div class="row" style="margin-top:12px;">
+      <div class="row mt-12">
         <div class="col">
           <label>confirmReturn(false) - Inspector (tvarkingas)</label>
-          <button class="btn" style="margin-top:8px;" id="confirm-ok">Grąžinta tvarkingai</button>
+          <button class="btn mt-8" id="confirm-ok">Grąžinta tvarkingai</button>
         </div>
         <div class="col">
           <label>confirmReturn(true) - Inspector (sugadintas)</label>
-          <button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="confirm-bad">Grąžinta sugadinta</button>
+          <button class="btn btn--danger mt-8" id="confirm-bad">Grąžinta sugadinta</button>
         </div>
       </div>
-      <div class="row" style="margin-top:12px;">
+      <div class="row mt-12">
         <div class="col">
           <label>complete() - Owner (tvarkingas)</label>
-          <button class="btn" style="margin-top:8px;" id="complete-ok">Grąžinti depozitą</button>
+          <button class="btn mt-8" id="complete-ok">Grąžinti depozitą</button>
         </div>
         <div class="col">
           <label>completeDamaged() - Owner (sugadintas)</label>
-          <button class="btn" style="margin-top:8px; background:#ff6b6b; color:#0b0d10;" id="complete-bad">Kompensacija nuomotojui</button>
+          <button class="btn btn--danger mt-8" id="complete-bad">Kompensacija nuomotojui</button>
         </div>
       </div>
-      <div id="action-msg" class="muted" style="margin-top:10px;"></div>
+      <div id="action-msg" class="muted mt-10"></div>
     </div>
 
     <div class="card">
       <h2>Logai</h2>
-      <div id="logs" class="muted" style="font-size:13px; white-space:pre-wrap;">-</div>
+      <div id="logs" class="muted log-box">-</div>
     </div>
   </div>
 
