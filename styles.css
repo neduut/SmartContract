@@ -55,13 +55,20 @@ input:focus { outline: 1px solid var(--accent); }
   padding: 10px 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 80ms ease, opacity 80ms ease;
+  transition: transform 80ms ease, opacity 80ms ease, background 80ms ease;
 }
 .btn.secondary { background: var(--accent-2); color: #0b0d10; }
 .btn--connect { background: #ffb347; color: #0b0d10; }
 .btn--disconnect { background: #ff6b6b; color: #0b0d10; }
+.btn--disabled {
+  background: #4a4758 !important;
+  color: #8a8195 !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn:hover:not(:disabled) { transform: translateY(-1px); }
+.btn.btn--disabled:hover { transform: none; cursor: not-allowed; }
 .muted { color: var(--muted); font-size: 13px; }
 .badge { display: inline-block; padding: 4px 8px; border-radius: 999px; background: #1f2630; color: var(--muted); font-size: 12px; }
 .error { color: var(--error); font-size: 14px; margin-top: 6px; }

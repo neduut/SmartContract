@@ -231,7 +231,7 @@ Rolė | Pradinės sumos |
 
 **Konfiguracijos:**
 
-Deposit: 0.05 ETH
+Deposit: 0.05 ETH (50000000000000000 Wei)
 
 **MetaMask patvirtinimas:**
 
