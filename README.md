@@ -442,7 +442,7 @@ Sukūriau `index.html` failą, kuris leidžia:
 - Įvesti contract'o adresą
 - Iškviesti funkcijas: `rent()`, `markIssued()`, `confirmReturn()`, `complete()`
 
-![frontas](dapp/image.png)
+![frontas](img/dapp.png)
 
 **Technologijos:**
 - MetaMask
