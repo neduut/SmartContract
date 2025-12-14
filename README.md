@@ -17,9 +17,9 @@ _(Escrow = tarpininkas, kuris laiko pinigus, kol abi pusės įvykdo savo įsipar
 - 🏄 Banglentių nuoma
 - 🚴 Dviračių nuoma
 - 🎾 Teniso raketės nuoma
-**...**
+- **...**
 
-Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia testnet**. Pridėjau **DApp** su MetaMask integracija.
+Sutartį testavau **Remix** aplinkoje ir paruošiau deploy'inimui į **Sepolia testnet**. Pridėjau **DApp** su MetaMask integracija (deploy'inimui asmeniškai naudojau tą patį Remix).
 
 ---
 
@@ -110,7 +110,8 @@ Created → Rented → Issued → ReturnedOk/ReturnedDamaged → Completed
 
 Testavau kontraktą **Remix IDE** su **JavaScript VM (Remix VM/Prague)**:
 
-### 5.1 Deploy
+<details>
+<summary>5.1 Deploy</summary>
 
 Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 
@@ -126,7 +127,10 @@ Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 
 <img width="750" alt="Contract address" src="https://github.com/user-attachments/assets/e95b7ec0-afa6-4230-b8a7-899c7c5b58ac" />
 
-### 5.2 rent() – Depozito mokėjimas
+</details>
+
+<details>
+<summary>5.2 rent() – Depozito mokėjimas</summary>
 
 **Mokėjimas sėkmingas:**
 
@@ -136,14 +140,20 @@ Sutarties diegimas su Owner, Inspector ir Renter vaidmenimis.
 
 <img width="300" alt="balance 1 ETH" src="https://github.com/user-attachments/assets/b023920a-8202-425e-b41b-ad6175fa733f" />
 
-### 5.3 markIssued() – Išdavimo patvirtinimas
+</details>
+
+<details>
+<summary>5.3 markIssued() – Išdavimo patvirtinimas</summary>
 
 Savininkas patvirtina, kad inventorius išduotas.
 **Patvirtinimas sėkmingas: **
 
 <img width="900" alt="markIssued call" src="https://github.com/user-attachments/assets/30f3112e-f220-4658-a865-a8815a5a2c47" />
 
-### 5.4 confirmReturn() – Inspektoriaus tikrinimas
+</details>
+
+<details>
+<summary>5.4 confirmReturn() – Inspektoriaus tikrinimas</summary>
 
 #### Scenarijus 1: Inventorius tvarkingas ✅
 
@@ -157,7 +167,10 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 
 <img width="900" alt="transaction success" src="https://github.com/user-attachments/assets/1efa9531-b72d-4cba-b322-6bcfd89a545b" />
 
-### 5.5 complete() – Depozito grąžinimas nuomininkui
+</details>
+
+<details>
+<summary>5.5 complete() – Depozito grąžinimas nuomininkui</summary>
 
 #### Scenarijus 1: Depozito grąžinimas ✅
 
@@ -171,8 +184,10 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 <img width="300" alt="balance 0 ETH" src="https://github.com/user-attachments/assets/283caa95-69b5-44b9-a1b7-e25cb1df6f40" />
 
+</details>
 
-### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
+<details>
+<summary>5.6 completeDamaged() – Pinigų grąžinimas savininkui</summary>
 
 #### Scenarijus 2: Inventorius sugadintas ❌
 
@@ -191,6 +206,8 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 <img width="300" alt="Owner receives deposit" src="https://github.com/user-attachments/assets/f83e8e13-0e5f-464e-9112-a302fd7b2790" />
 
 Gas taip pat yra nuskaičiuojamas, tai matosi iš Inspector sąskaitos.
+
+</details>
 
 ---
 
@@ -227,7 +244,8 @@ Rolė | Pradinės sumos |
 
 <img width="300" height="779" alt="image" src="https://github.com/user-attachments/assets/25e424d1-36f1-4d07-832f-093a677d1e92" />
 
-### 5.1 Deploy
+<details>
+<summary>5.1 Deploy</summary>
 
 **Konfiguracijos:**
 
@@ -241,7 +259,10 @@ Deposit: 0.05 ETH (50000000000000000 Wei)
 
 <img width="2134" height="488" alt="image" src="https://github.com/user-attachments/assets/b8911b50-0f85-4a96-ba9f-c49fb41ba612" />
 
-### 5.2 rent() – Depozito mokėjimas
+</details>
+
+<details>
+<summary>5.2 rent() – Depozito mokėjimas</summary>
 
 **MetaMask patvirtinimas:**
 
@@ -259,8 +280,10 @@ Deposit: 0.05 ETH (50000000000000000 Wei)
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/700baab5-0f9f-4464-8ee0-b46efb079d42" />
 
+</details>
 
-### 5.3 markIssued() – Išdavimo patvirtinimas
+<details>
+<summary>5.3 markIssued() – Išdavimo patvirtinimas</summary>
 
 Savininkas patvirtina, kad inventorius išduotas.
 **MetaMask patvirtinimas:**
@@ -272,7 +295,10 @@ Savininkas patvirtina, kad inventorius išduotas.
 <img width="2141" height="112" alt="image" src="https://github.com/user-attachments/assets/829376c2-c7f0-4c2b-a3b2-b12e8ecc0793" />
 
 
-### 5.4 confirmReturn() – Inspektoriaus tikrinimas
+</details>
+
+<details>
+<summary>5.4 confirmReturn() – Inspektoriaus tikrinimas</summary>
 
 #### Scenarijus 1: Inventorius tvarkingas ✅
 
@@ -293,7 +319,10 @@ Inspektorius patvirtina, kad inventorius grąžintas be pažeidimų (damaged = f
 <img width="2164" height="174" alt="image" src="https://github.com/user-attachments/assets/972ab305-7318-4d15-b449-9a73efa8da7d" />
 
 
-### 5.5 complete() – Depozito grąžinimas nuomininkui
+</details>
+
+<details>
+<summary>5.5 complete() – Depozito grąžinimas nuomininkui</summary>
 
 #### Scenarijus 1: Depozito grąžinimas ✅
 
@@ -311,6 +340,8 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
 
+</details>
+
 ### Sumų palyginimas
 
 | Rolė | Pradinės sumos | Galutinės sumos |
@@ -324,7 +355,8 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 _*Galutinės sumos = pradinės sumos, naudojamos antram scenarijui_
 
-### 5.6 completeDamaged() – Pinigų grąžinimas savininkui
+<details>
+<summary>5.6 completeDamaged() – Pinigų grąžinimas savininkui</summary>
 
 #### Scenarijus 2: Inventorius sugadintas ❌
 
@@ -350,6 +382,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
 
+</details>
 
 ### Sumų palyginimas
 
