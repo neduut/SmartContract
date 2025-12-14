@@ -215,6 +215,9 @@ Gas taip pat yra nuskaičiuojamas, tai matosi iš Inspector sąskaitos.
 
 Po lokalaus testavimo deploy'inau į **Sepolia testnet**:
 
+<details>
+<summary>5.0 Paruošimas (MetaMask, sąskaitos, faucet)</summary>
+
 **Procesas:**
 1. Susikūriau MetaMask accounta ir perjungiau į Sepolia
 
@@ -243,6 +246,8 @@ Rolė | Pradinės sumos |
 | Inspector | 0.0578 ETH |
 
 <img width="300" height="779" alt="image" src="https://github.com/user-attachments/assets/25e424d1-36f1-4d07-832f-093a677d1e92" />
+
+</details>
 
 <details>
 <summary>5.1 Deploy</summary>
@@ -422,27 +427,27 @@ Sutartis pervedė nuomotojui 0.05 ETH
 
 ---
 
-## 8. DApp (Front-End)
+## 8. Pastaba dėl naudojamų įrankių
+
+Projektui sąmoningai nenaudojau **Truffle** ar **Ganache**, nes laboratorinis darbas orientuotas į išmaniosios sutarties verslo logiką, jos testavimą ir realų naudojimą per decentralizuotą aplikaciją (DApp).
+
+Testavimas buvo atliktas **Remix IDE** aplinkoje ir **Sepolia testnet**, kas leidžia patikrinti sutarties veikimą realiomis Ethereum tinklo sąlygomis (MetaMask, realūs sandoriai, gas mokesčiai, Etherscan logai).
+
+---
+
+## 9. DApp (Front-End)
 
 Sukūriau `index.html` failą, kuris leidžia:
 - Prisijungti per MetaMask
 - Įvesti contract'o adresą
 - Iškviesti funkcijas: `rent()`, `markIssued()`, `confirmReturn()`, `complete()`
 
-![Frontend](docs/frontend.png)
+![frontas](dapp/image.png)
 
 **Technologijos:**
 - MetaMask
 - ethers.js
 - HTML + JavaScript
-
----
-
-## 9. Pastaba dėl naudojamų įrankių
-
-Projektui sąmoningai nenaudojau **Truffle** ar **Ganache**, nes laboratorinis darbas orientuotas į išmaniosios sutarties verslo logiką, jos testavimą ir realų naudojimą per decentralizuotą aplikaciją (DApp).
-
-Testavimas buvo atliktas **Remix IDE** aplinkoje ir **Sepolia testnet**, kas leidžia patikrinti sutarties veikimą realiomis Ethereum tinklo sąlygomis (MetaMask, realūs sandoriai, gas mokesčiai, Etherscan logai).
 
 ---
 
@@ -452,14 +457,13 @@ Testavimas buvo atliktas **Remix IDE** aplinkoje ir **Sepolia testnet**, kas lei
 1. Atidaryti **Remix IDE** → https://remix.ethereum.org
 2. Įkelti `contracts/SportRent.sol`
 3. Compile (Solidity 0.8.x)
-4. Deploy:
-   - **JavaScript VM** – lokalus testavimas
-   - **Sepolia** – per MetaMask
+4. Environment: `Browser extension → Injected Provider - MetaMask`
+5. Pasirinkus owner account'ą nurodyti depozito dydį ir incpector account'ą ir deployint sutartį
 
 ### DApp:
-1. Atidaryti `index.html` naršyklėje
+1. Atidaryti `index.html` per Live Server
 2. Connect Wallet (MetaMask)
 3. Įvesti contract'o adresą
-4. Naudotis funkcijomis
+4. Keičiant account'ą MetaMask'e naudotis funkcijomis
 
 
