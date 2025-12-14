@@ -345,9 +345,7 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5bd12dd0-3277-4e77-aa5c-2b9c64a5e6a6" />
 
-</details>
-
-### Sumų palyginimas
+**Sumų palyginimas (scenarijus 1):**
 
 | Rolė | Pradinės sumos | Galutinės sumos |
 |----------|----------------|---------------------|
@@ -355,10 +353,11 @@ Kai inventorius tvarkingas, nuomininkas gauna pinigus atgal.
 | Owner | 0.0935 ETH | 0.0919 ETH |
 | Inspector | 0.0578 ETH | 0.0578 ETH |
 
-
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/67ea728f-bf25-48e3-aad1-e9a5e9585b8b" />
 
 _*Galutinės sumos = pradinės sumos, naudojamos antram scenarijui_
+
+</details>
 
 <details>
 <summary>5.6 completeDamaged() – Pinigų grąžinimas savininkui</summary>
@@ -387,9 +386,7 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/4fea80f5-226c-4445-9277-bf72a6ca8f2f" />
 
-</details>
-
-### Sumų palyginimas
+**Sumų palyginimas (scenarijus 2):**
 
 | Rolė | Pradinės sumos | Galutinės sumos |
 |----------|----------------|---------------------|
@@ -398,6 +395,8 @@ Kai inventorius sugadintas, savininkas gauna pinigus kaip kompensaciją.
 | Inspector | 0.0578 ETH | 0.0578 ETH |
 
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/5d26624b-c458-4544-935a-ae21d08ffdfc" />
+
+</details>
 
 ---
 
