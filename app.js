@@ -129,9 +129,10 @@ async function refresh() {
 }
 
 function updateActionButtons(role) {
-  // rent: any role can call
-  $("rent-btn").disabled = false;
-  $("rent-btn").classList.remove("btn--disabled");
+  // rent: Renter only
+  const canRent = role === "Renter";
+  $("rent-btn").disabled = !canRent;
+  $("rent-btn").classList.toggle("btn--disabled", !canRent);
   
   // markIssued: Owner only
   const canMark = role === "Owner";
