@@ -75,10 +75,10 @@ contract SportRent {
      * @notice Renter sumoka depozitą ir nuomojasi inventorių
      */
     function rent() external payable inState(State.Created) {
-        // Front-running protection: assign renter before require
-        renter = msg.sender;
+        require(renter == address(0), "Already rented");
         require(msg.value == deposit, "Incorrect deposit amount");
 
+        renter = msg.sender;
         state = State.Rented;
 
         emit Rented(renter, msg.value);

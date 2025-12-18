@@ -74,7 +74,7 @@
       <div class="divider"></div>
       <div class="row actions-top">
         <div class="col flex-2-320">
-          <label>Renter sumoka nurodytą depozitą (ETH)</label>
+          <label>Nuomininkas sumoka nurodytą depozitą (ETH)</label>
           <input id="rent-value" type="number" step="0.0001" placeholder="0.05" />
         </div>
         <div class="col flex-0-180">
@@ -83,31 +83,59 @@
       </div>
       <div class="row actions-single mt-12">
         <div class="col flex-0-180">
-          <label>markIssued() - Owner</label>
+          <label>Nuomotojas: </label>
           <button class="btn full-width mt-8" id="mark-btn">Patvirtinti išdavimą</button>
         </div>
       </div>
       <div class="row mt-12">
         <div class="col">
-          <label>confirmReturn(false) - Inspector (tvarkingas)</label>
+          <label>Inspektorius: </label>
           <button class="btn mt-8" id="confirm-ok">Grąžinta tvarkingai</button>
         </div>
         <div class="col">
-          <label>confirmReturn(true) - Inspector (sugadintas)</label>
+          <label>Inspektorius: </label>
           <button class="btn btn--danger mt-8" id="confirm-bad">Grąžinta sugadinta</button>
         </div>
       </div>
       <div class="row mt-12">
         <div class="col">
-          <label>complete() - Owner (tvarkingas)</label>
+          <label>Nuomotojas: </label>
           <button class="btn mt-8" id="complete-ok">Grąžinti depozitą</button>
         </div>
         <div class="col">
-          <label>completeDamaged() - Owner (sugadintas)</label>
+          <label>Nuomotojas: </label>
           <button class="btn btn--danger mt-8" id="complete-bad">Gauti kompensaciją</button>
         </div>
       </div>
       <div id="action-msg" class="muted mt-10"></div>
+    </div>
+
+    <div class="card">
+      <h2>Transakcijų istorija (Etherscan)
+        <button class="btn-icon-refresh" id="fetch-txs-btn" title="Atnaujinti transakcijas">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2-8.83"></path>
+          </svg>
+        </button>
+      </h2>
+      <div id="txs-container" class="muted txs-container">
+        <table id="txs-table" class="txs-table">
+          <thead class="txs-thead">
+            <tr>
+              <th class="txs-th txs-th-left">Transaction Hash</th>
+              <th class="txs-th txs-th-left">Method</th>
+              <th class="txs-th txs-th-center">Block</th>
+              <th class="txs-th txs-th-center">Age</th>
+              <th class="txs-th txs-th-left">From</th>
+              <th class="txs-th txs-th-left">To</th>
+              <th class="txs-th txs-th-right">Amount</th>
+              <th class="txs-th txs-th-right">Txn Fee</th>
+            </tr>
+          </thead>
+          <tbody id="txs-body"></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card">

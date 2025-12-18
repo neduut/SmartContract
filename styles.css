@@ -100,3 +100,87 @@ code { background: #0c0f15; padding: 2px 6px; border-radius: 6px; color: var(--a
 .full-width { width:100%; }
 .btn--danger { background:#ff6b6b; color:#0b0d10; }
 .log-box { font-size:13px; white-space:pre-wrap; }
+
+/* Refresh icon button */
+.btn-icon-refresh {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon-refresh:hover {
+  background: var(--border);
+  color: var(--accent);
+}
+.btn-icon-refresh:active svg {
+  transform: rotate(180deg);
+}
+.btn-icon-refresh svg {
+  transition: transform 0.3s ease;
+}
+.btn-icon-refresh::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+.btn-icon-refresh:hover::after {
+  opacity: 1;
+}
+
+/* Transaction History Table */
+.txs-container {
+  margin-top: 16px;
+  margin-bottom: 15px;
+  overflow-x: auto;
+}
+.txs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.txs-thead {
+  border-bottom: 2px solid #444;
+}
+.txs-th {
+  padding: 8px;
+}
+.txs-th-left {
+  text-align: left;
+}
+.txs-th-center {
+  text-align: center;
+}
+.txs-th-right {
+  text-align: right;
+}
+.txs-table td {
+  padding: 8px;
+  color: #e8e8f5;
+}
+.txs-table a {
+  color: #e8e8f5;
+  text-decoration: none;
+}
+.txs-table a:hover { color: var(--accent); }
+.txs-num { text-align: right; }

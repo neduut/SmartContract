@@ -447,6 +447,7 @@ Sukūriau `index.html` failą, kuris leidžia:
 - MetaMask
 - ethers.js
 - HTML + JavaScript
+- Etherscan API (Sepolia tx istorijai)
 
 ---
 
